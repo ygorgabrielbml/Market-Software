@@ -1,8 +1,0 @@
-/**
- * 
- */
-/**
- * 
- */
-module Market_Software {
-}
