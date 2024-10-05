@@ -150,39 +150,5 @@ public class Produto {
 		return estoque;
 	}
 	
-	public static ArrayList<Produto> verificarProdutoEspecifico(String nome, String cb){
-		Connection con = null;
-		ResultSet resultado = null;
-		ArrayList<Produto> item = new ArrayList<>();
-		con = ConexaoDB.getInstance().getConnection();
-		try {
-			String query = "SELECT * FROM produtos WHERE nome = ? OR CB = ?";
-			PreparedStatement pstmt = con.prepareStatement(query);
-			pstmt.setString(1, nome);
-			pstmt.setString(2, cb);
-			resultado = pstmt.executeQuery();
-			
-			int id = resultado.getInt("id");
-			String cb2 = resultado.getString("CB");
-			String nome2 = resultado.getString("nome");
-			double valor = resultado.getDouble("valor");
-			int quantidade = resultado.getInt("quantidade");
-			
-			item.add(new Produto(id, nome2, cb2, valor, quantidade));
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
-		}
-
-		finally {
-			try {
-				if (con != null) {
-					con.close();
-				}
-			} catch (SQLException e) {
-				// Falhou também para fechar o arquivo
-				System.err.println(e.getMessage());
-			}
-		}
-		return item;
-	}
+	
 }

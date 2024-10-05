@@ -21,7 +21,10 @@ public class Testmain {
 			
 		}
 		else if (escolha == 3) {
-			ArrayList<Produto> busca = Produto.verificarProdutoEspecifico("arroz", "23");
+			ArrayList<Carrinho> busca = Carrinho.pesquisar("arroz");
 			System.out.println(busca);
+		}
+		else if(escolha == 4) {
+			Cadastro.registro(2, "joao", "12345678911", "123");
 		}
 	}}

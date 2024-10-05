@@ -22,6 +22,8 @@ public class JCadastro {
 	private JPasswordField txtSenha;
 	private JPasswordField txtSenha2;
 
+	
+
 	/**
 	 * Launch the application.
 	 */
@@ -137,7 +139,12 @@ public class JCadastro {
 		lblNewLabel_1.setBounds(26, 38, 56, 14);
 		panel.add(lblNewLabel_1);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-
+		
+		String nome = txtNome.getText();
+		String cpf = txtCPF.getText();
+		String senha = new String(txtSenha.getPassword());
+		String senha2 = new String(txtSenha2.getPassword());
+		
 		
 	}
 }

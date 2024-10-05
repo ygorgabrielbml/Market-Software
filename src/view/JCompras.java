@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,6 +18,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import backend.Carrinho;
+import backend.Produto;
 
 public class JCompras extends JFrame {
 
@@ -134,6 +138,14 @@ public class JCompras extends JFrame {
 		btnPesquisar.setBounds(423, 10, 111, 23);
 		btnPesquisar.setBackground(new Color(49, 62, 69));
 		panel_1.add(btnPesquisar);
+		btnPesquisar.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	String pesquisa = txtPesquisa.getText();
+		    	ArrayList<Carrinho> resultado = Carrinho.pesquisar(pesquisa);
+		    	System.out.println(resultado);
+		    }
+		});
 		
 		JLabel lblNewLabel = new JLabel("Resultados:");
 		lblNewLabel.setBounds(10, 48, 89, 14);

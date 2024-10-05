@@ -108,9 +108,37 @@ public class JEstoque extends JFrame {
 		        dispose();
 		    }
 		});
+
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setLayout(null);
 		panel_1.setBounds(10, 57, 464, 243);
 		contentPane.add(panel_1);
+
+		// Botão "Adicionar Produto"
+		JButton btnAdicionarProduto = new JButton("Adicionar Produto");
+		btnAdicionarProduto.setBounds(35, 200, 150, 30); // Ajuste de acordo com a posição desejada
+		panel_1.add(btnAdicionarProduto);
+
+		btnAdicionarProduto.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	System.out.println("a");
+		    }
+		});
+
+		// Botão "Remover Produto"
+		JButton btnRemoverProduto = new JButton("Remover Produto");
+		btnRemoverProduto.setBounds(275, 200, 150, 30); // Ajuste de acordo com a posição desejada
+		panel_1.add(btnRemoverProduto);
+
+		btnRemoverProduto.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        System.out.println("b");
+		    }
+		});
+
+		
 	}
 }
