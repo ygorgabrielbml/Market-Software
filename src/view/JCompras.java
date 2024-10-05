@@ -133,7 +133,9 @@ public class JCompras extends JFrame {
 		txtPesquisa.setColumns(10);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.setForeground(new Color(255, 255, 255));
 		btnPesquisar.setBounds(423, 10, 111, 23);
+		btnPesquisar.setBackground(new Color(49, 62, 69));
 		panel_1.add(btnPesquisar);
 		
 		JLabel lblNewLabel = new JLabel("Resultados:");
@@ -150,6 +152,8 @@ public class JCompras extends JFrame {
 		panel_1.add(separator);
 		
 		JButton btnFiltrar = new JButton("Filtrar");
+		btnFiltrar.setForeground(new Color(255, 255, 255));
+		btnFiltrar.setBackground(new Color(49, 62, 69));
 		btnFiltrar.setBounds(10, 10, 111, 23);
 		panel_1.add(btnFiltrar);
 		
@@ -165,14 +169,24 @@ public class JCompras extends JFrame {
 		panel_1.add(separator_1);
 		
 		JButton btnNewButton = new JButton("Débito");
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setBackground(new Color(49, 62, 69));
 		btnNewButton.setBounds(372, 291, 76, 23);
 		panel_1.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Crédito");
+		btnNewButton_1.setBackground(new Color(49, 62, 69));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_1.setForeground(new Color(255, 255, 255));
 		btnNewButton_1.setBounds(458, 291, 76, 23);
 		panel_1.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("À vista");
+		btnNewButton_2.setForeground(new Color(255, 255, 255));
+		btnNewButton_2.setBackground(new Color(49, 62, 69));
 		btnNewButton_2.setBounds(286, 291, 76, 23);
 		panel_1.add(btnNewButton_2);
 		
@@ -186,10 +200,19 @@ public class JCompras extends JFrame {
 		panel_1.add(textArea);
 		
 		JButton btnNewButton_3 = new JButton("Remover");
+		btnNewButton_3.setForeground(new Color(255, 255, 255));
+		btnNewButton_3.setBackground(new Color(49, 62, 69));
 		btnNewButton_3.setBounds(423, 198, 89, 23);
 		panel_1.add(btnNewButton_3);
 		
 		JButton btnNewButton_3_1 = new JButton("Cancelar");
+		btnNewButton_3_1.setBackground(new Color(49, 62, 69));
+		btnNewButton_3_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_3_1.setForeground(new Color(255, 255, 255));
+		btnNewButton_3.setBackground(new Color(49, 62, 69));
 		btnNewButton_3_1.setBounds(423, 221, 89, 23);
 		panel_1.add(btnNewButton_3_1);
 		
