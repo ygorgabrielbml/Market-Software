@@ -128,6 +128,8 @@ public class JInicio extends JFrame {
 		txtPesquisa.setColumns(10);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.setForeground(new Color(255, 255, 255));
+		btnPesquisar.setBackground(new Color(49, 62, 69));
 		btnPesquisar.setBounds(308, 11, 96, 20);
 		panel_1.add(btnPesquisar);
 		btnPesquisar.addActionListener(new ActionListener() {

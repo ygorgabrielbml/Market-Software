@@ -193,6 +193,8 @@ public class JPerfil extends JFrame {
         panel_1.add(textArea_5);
 
         JButton btnNewButton_3 = new JButton("Mudar foto");
+        btnNewButton_3.setForeground(new Color(255, 255, 255));
+        btnNewButton_3.setBackground(new Color(49, 62, 69));
         btnNewButton_3.setBounds(10, 138, 117, 22);
         panel_1.add(btnNewButton_3);
 
