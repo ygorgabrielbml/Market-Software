@@ -25,6 +25,9 @@ public class Testmain {
 			System.out.println(busca);
 		}
 		else if(escolha == 4) {
-			Cadastro.registro(2, "joao", "12345678911", "123");
+			Usuario c1 = new Usuario("ana", "109.876.543-21", false, "Aa111111");
+			String mensagem = c1.registro();
+			System.out.println(mensagem);
+			
 		}
 	}}

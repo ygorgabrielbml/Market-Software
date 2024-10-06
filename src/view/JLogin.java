@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import backend.Usuario;
 
 public class JLogin extends JFrame {
 
@@ -86,13 +89,19 @@ public class JLogin extends JFrame {
         PanelGeral.add(btnEntrar);
         btnEntrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (txtUsuario.getText() != null &&
-                    !txtUsuario.getText().isEmpty() &&
-                    txtSenha.getPassword() != null &&
-                    txtSenha.getPassword().length > 0) {
-                    JOptionPane.showMessageDialog(btnEntrar, "Acesso realizado!");
+            	String login = txtUsuario.getText();
+            	String senha = new String(txtSenha.getPassword());
+            	String mensagem = "Acesso negado, verifique se você preencheu os campos corretamente!";
+                if (login != null &&
+                    !login.isEmpty() &&
+                    senha != null &&
+                    senha.length() > 0) {
+                	Usuario l1 = new Usuario(null, null, true, senha);
+                	l1.setLogin(login);
+                	mensagem = l1.login();
+                    JOptionPane.showMessageDialog(btnEntrar, mensagem);
                 } else {
-                    JOptionPane.showMessageDialog(btnEntrar, "Acesso negado, verifique se você preencheu os campos corretamente!", "Aviso", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(btnEntrar, mensagem, "Aviso", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });

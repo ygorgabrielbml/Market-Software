@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import backend.Cadastro;
+import backend.Usuario;
 
 public class JCadastro extends JFrame {
 
@@ -97,20 +97,20 @@ public class JCadastro extends JFrame {
                 }
 
                 // Criação do cadastro
-                Cadastro cadastro = new Cadastro();
-                cadastro.setNome(txtNome.getText());
-                cadastro.setCpf(cpf);
+                Usuario usuario = new Usuario();
+                usuario.setNome(txtNome.getText());
+                usuario.setCpf(cpf);
                 
                 // Obtendo o valor selecionado do JComboBox
                 String generoSelecionado = (String) comboboxHomemMulher.getSelectedItem();
                 boolean genero = "Masculino".equals(generoSelecionado); // true se "Masculino", false se "Feminino"
 
-                cadastro.setGenero(genero); // Atribuindo o valor booleano ao objeto Cadastro
-                cadastro.setSenha(new String(txtSenha.getPassword()));
-                cadastro.setSenha2(new String(txtSenha2.getPassword()));
+                usuario.setGenero(genero); // Atribuindo o valor booleano ao objeto Cadastro
+                usuario.setSenha(new String(txtSenha.getPassword()));
+                String mensagem = usuario.registro();
 
                 // Aqui você pode usar o objeto 'cadastro' conforme necessário
-                JOptionPane.showMessageDialog(JCadastro.this, "Conta criada com sucesso!");
+                JOptionPane.showMessageDialog(JCadastro.this, mensagem);
             }
         });
 
