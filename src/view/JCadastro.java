@@ -7,6 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -16,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
 import backend.Usuario;
 
 public class JCadastro extends JFrame {
@@ -97,7 +101,11 @@ public class JCadastro extends JFrame {
                 }
 
                 // Criação do cadastro
+                LocalDate dataAtual = LocalDate.now();
+                DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                String dataFormatada = dataAtual.format(formato);
                 Usuario usuario = new Usuario();
+                usuario.setDataAdmissao(dataFormatada);
                 usuario.setNome(txtNome.getText());
                 usuario.setCpf(cpf);
                 

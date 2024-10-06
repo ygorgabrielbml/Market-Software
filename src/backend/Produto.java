@@ -15,6 +15,7 @@ public class Produto {
 	private Integer id;
 	private int quantidade;
 
+	// Construtores da classe
 	public Produto() {
 	}
 	public Produto(int id, String n, String cb, double v, int q) {
@@ -26,6 +27,7 @@ public class Produto {
 	}
 	
 	@Override
+	// Reescrição do metodo toString para conseguir mostrar corretamente a lista de produtos no aplicativo
     public String toString() {
         return "Produto { " +
                 "ID: " + id +
@@ -36,6 +38,7 @@ public class Produto {
                 " }";
     }
 
+	// Getters e Setters
 	public String getNome() {
 		return nome;
 	}
@@ -60,10 +63,11 @@ public class Produto {
 		this.valor = valor;
 	}
 
+	// Método para adicionar um novo produto ao estoque
 	public static void addProduto(String nome, String cb, double valor, int quantidade) {
 		Connection con = null;
 		try {
-			con = ConexaoDB.getInstance().getConnection();
+			con = ConexaoDB.getInstance().getConnection(); // conexão com o banco de dados
 			String query = "INSERT INTO produtos (nome, CB, valor, quantidade) VALUES (?, ?, ?, ?)";
 			PreparedStatement pstmt = con.prepareStatement(query);
 

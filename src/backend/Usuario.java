@@ -13,7 +13,8 @@ public class Usuario {
 	private String senha;
 	private boolean genero;
 	private String login;
-	private int idUser;
+	protected int idUser;
+	private String dataAdmissao;
 
 	
 	// Contrutores da classe
@@ -22,12 +23,12 @@ public class Usuario {
 		
 	}
 	
-	public Usuario(String nome, String cpf, boolean genero, String senha) {
-		super();
+	public Usuario(String nome, String cpf, boolean genero, String senha, String data) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.genero = genero;
 		this.senha = senha;
+		this.dataAdmissao = data;
 	}
 
 	// Getters e Setters
@@ -78,11 +79,20 @@ public class Usuario {
 	public int getIdUser() {
 		return idUser;
 	}
+	
+	public void setDataAdmissao(String data) {
+		this.dataAdmissao = data;
+	}
+	
+	public String getDataAdmissao() {
+		return dataAdmissao;
+	}
 
 	// Método para registrar novo usuário.
 	public String registro() {
 		Connection con = null;
 		String mensagem = null;
+		
 		try {
 			con = ConexaoDB.getInstance().getConnection(); // Conexão é feita com o banco de dados
 			String querySelect = "SELECT nome, cpf, senha FROM usuários WHERE nome = ? OR cpf = ?";
@@ -100,13 +110,14 @@ public class Usuario {
 				mensagem = "esse usuário ja existe";
 
 			} else {
-				String queryInsert = "INSERT INTO usuários (nome, cpf, senha, genero) VALUES (?, ?, ?, ?)";
+				String queryInsert = "INSERT INTO usuários (nome, cpf, senha, genero, dataAdmissao) VALUES (?, ?, ?, ?, ?)";
 				PreparedStatement pstmtI = con.prepareStatement(queryInsert);
 
 				pstmtI.setString(1, this.nome);
 				pstmtI.setString(2, this.cpf);
 				pstmtI.setString(3, this.senha);
 				pstmtI.setBoolean(4, this.genero);
+				pstmtI.setString(5, this.dataAdmissao);
 
 				pstmtI.executeUpdate();
 				mensagem = "Usuário cadastrado com sucesso";
@@ -150,7 +161,12 @@ public class Usuario {
 			// caso ele identifique que o nome buscado é igual ao nome que veio na busca do banco de dados e a senha ou que o cpf buscado é o mesmo
 			// do cpf que veio na busca e a senha, o login é efetuado e seta o id do usuário buscado como uma identificação que vai ser
 			// usada em outros pontos do aplicativo.
-			if ((this.login == n && this.senha == s) || (this.login == c && this.senha == s)) {
+			System.out.println(login);
+			System.out.println(n);
+			System.out.println(c);
+			System.out.println(s);
+			System.out.println(senha);
+			if ((this.login.equals(n) && this.senha.equals(s)) || (this.login.equals(c) && this.senha.equals(s))) {
 				mensagem = "Login efetuado com sucesso";
 				setIdUser(i);
 
@@ -172,5 +188,10 @@ public class Usuario {
 		}
 		// a função retorna uma mensagem que vai ser mostrada na tela do aplicativo conforme o resultado
 		return mensagem;
+	}
+	
+	public ArrayList<Usuario> mostrarInfos(){
+		
+		return;
 	}
 }

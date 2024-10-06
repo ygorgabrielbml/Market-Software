@@ -96,7 +96,8 @@ public class JLogin extends JFrame {
                     !login.isEmpty() &&
                     senha != null &&
                     senha.length() > 0) {
-                	Usuario l1 = new Usuario(null, null, true, senha);
+                	Usuario l1 = new Usuario();
+                	l1.setSenha(senha);
                 	l1.setLogin(login);
                 	mensagem = l1.login();
                     JOptionPane.showMessageDialog(btnEntrar, mensagem);

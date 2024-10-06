@@ -6,28 +6,9 @@ import java.util.Scanner;
 
 public class Testmain {
 	public static void main(String[] args) throws SQLException {
-		Scanner input = new Scanner(System.in);
-		System.out.print("escolha: ");
-		int escolha = input.nextInt();
-		if (escolha == 1) {
-			Produto.addProduto("arroz", "1234567891011", 12.50, 200);
-			System.out.println("produto adicionado");
-		}
-		else if (escolha == 2) {
-			ArrayList<Produto> busca = Produto.verificarEstoque();
-			for (Produto p : busca) {
-				System.out.println(p);
-			}
-			
-		}
-		else if (escolha == 3) {
-			ArrayList<Carrinho> busca = Carrinho.pesquisar("arroz");
-			System.out.println(busca);
-		}
-		else if(escolha == 4) {
-			Usuario c1 = new Usuario("ana", "109.876.543-21", false, "Aa111111");
-			String mensagem = c1.registro();
-			System.out.println(mensagem);
-			
-		}
-	}}
+
+		InfoPlus venda = new InfoPlus("a", "111.111.111-11", true, "Aa123456", "06/10/2024", 1, 1);
+		venda.registrarVenda(25.50);
+
+	}
+}
