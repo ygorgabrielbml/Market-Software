@@ -22,12 +22,12 @@ import javax.swing.SwingConstants;
 public class JPerfil extends JFrame {
 
     private static final long serialVersionUID = 1L;
-    private JPanel contentPane;
-    private JLabel imagemLabel; // Declare imagemLabel como um atributo da classe
+    private JPanel PanelGeral;
+    private JLabel lblImagem;
 
-    /**
-     * Launch the application.
-     */
+    
+     // Launch the application.
+     
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -42,31 +42,31 @@ public class JPerfil extends JFrame {
         });
     }
 
-    /**
-     * Create the frame.
-     */
+    //Create the frame.
+     
     public JPerfil() {
         setTitle("Perfil");
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
-        contentPane = new JPanel();
-        contentPane.setBackground(new Color(184, 134, 11));
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        PanelGeral = new JPanel();
+        PanelGeral.setBackground(new Color(184, 134, 11));
+        PanelGeral.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(PanelGeral);
+        PanelGeral.setLayout(null);
 
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
+        //Inicio do Header.
+        
+        JPanel Header = new JPanel();
+        Header.setBackground(new Color(218, 165, 32));
+        Header.setBounds(0, 0, 434, 44);
+        PanelGeral.add(Header);
+        Header.setLayout(null);
 
-        JPanel panel = new JPanel();
-        panel.setBackground(new Color(218, 165, 32));
-        panel.setBounds(0, 0, 434, 44);
-        contentPane.add(panel);
-        panel.setLayout(null);
-
-        JButton btnNewButton = new JButton("Compras");
-        btnNewButton.setBounds(335, 11, 89, 23);
-        panel.add(btnNewButton);
-        btnNewButton.addActionListener(new ActionListener() {
+        JButton btnCompras = new JButton("Compras");
+        btnCompras.setBounds(335, 11, 89, 23);
+        Header.add(btnCompras);
+        btnCompras.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JCompras comprasFrame = new JCompras();
@@ -84,8 +84,8 @@ public class JPerfil extends JFrame {
 
         JButton btnEstoque = new JButton("Estoque");
         btnEstoque.setBounds(10, 11, 89, 23);
-        panel.add(btnEstoque);
-        btnEstoque.addActionListener(new ActionListener() { // Corrigido para usar btnEstoque
+        Header.add(btnEstoque);
+        btnEstoque.addActionListener(new ActionListener() { 
             @Override
             public void actionPerformed(ActionEvent e) {
                 JEstoque estoqueFrame = new JEstoque();
@@ -102,8 +102,8 @@ public class JPerfil extends JFrame {
 
         JButton btnInicio = new JButton("Início");
         btnInicio.setBounds(171, 11, 89, 23);
-        panel.add(btnInicio);
-        btnInicio.addActionListener(new ActionListener() { // Corrigido para usar btnInicio
+        Header.add(btnInicio);
+        btnInicio.addActionListener(new ActionListener() { 
             @Override
             public void actionPerformed(ActionEvent e) {
                 JInicio inicioFrame = new JInicio();
@@ -118,87 +118,107 @@ public class JPerfil extends JFrame {
             }
         });
 
-        JPanel panel_1 = new JPanel();
-        panel_1.setBounds(10, 61, 414, 189);
-        contentPane.add(panel_1);
-        panel_1.setLayout(null);
+        //Fim do Header.
+        
+        //Inicio do painel do meio.
+        JPanel PanelMeio = new JPanel();
+        PanelMeio.setBounds(10, 61, 414, 189);
+        PanelGeral.add(PanelMeio);
+        PanelMeio.setLayout(null);
 
-        imagemLabel = new JLabel();
-        imagemLabel.setBounds(10, 39, 117, 88);
-        panel_1.add(imagemLabel);
+        lblImagem = new JLabel();
+        lblImagem.setBounds(10, 39, 117, 88);
+        PanelMeio.add(lblImagem);
 
-        JTextArea textArea = new JTextArea();
-        textArea.setBounds(139, 39, 156, 22);
-        panel_1.add(textArea);
+        //Inicio do nome & cpf do funcionário.
+        
+        JTextArea infoNome = new JTextArea();
+        infoNome.setBounds(139, 39, 156, 22);
+        PanelMeio.add(infoNome);
 
-        JLabel lblNewLabel = new JLabel("Nome:");
-        lblNewLabel.setBounds(139, 25, 46, 14);
-        lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-        panel_1.add(lblNewLabel);
+        JLabel lblNome = new JLabel("Nome:");
+        lblNome.setBounds(139, 25, 46, 14);
+        lblNome.setFont(new Font("Tahoma", Font.BOLD, 11));
+        PanelMeio.add(lblNome);
 
-        JLabel lblNewLabel_1 = new JLabel("CPF:");
-        lblNewLabel_1.setBounds(139, 60, 46, 14);
-        lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-        panel_1.add(lblNewLabel_1);
+        JLabel lblCPF = new JLabel("CPF:");
+        lblCPF.setBounds(139, 60, 46, 14);
+        lblCPF.setFont(new Font("Tahoma", Font.BOLD, 11));
+        PanelMeio.add(lblCPF);
 
-        JTextArea textArea_1 = new JTextArea();
-        textArea_1.setBounds(139, 72, 156, 22);
-        panel_1.add(textArea_1);
+        JTextArea infoCPF = new JTextArea();
+        infoCPF.setBounds(139, 72, 156, 22);
+        PanelMeio.add(infoCPF);
 
-        JLabel lblNewLabel_2 = new JLabel("Vendas realizadas:");
-        lblNewLabel_2.setBounds(139, 93, 126, 14);
-        lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 11));
-        panel_1.add(lblNewLabel_2);
+        //Fim do nome & cpf do funcionário.
+        
+        //Inicio do vendas realizadas & valor gerado;
+        
+        JLabel lblVendasRealizadas = new JLabel("Vendas realizadas:");
+        lblVendasRealizadas.setBounds(139, 93, 126, 14);
+        lblVendasRealizadas.setFont(new Font("Tahoma", Font.BOLD, 11));
+        PanelMeio.add(lblVendasRealizadas);
 
-        JTextArea textArea_3 = new JTextArea();
-        textArea_3.setBounds(139, 105, 156, 22);
-        panel_1.add(textArea_3);
+        JTextArea infoVendasRealizadas = new JTextArea();
+        infoVendasRealizadas.setBounds(139, 105, 156, 22);
+        PanelMeio.add(infoVendasRealizadas);
 
-        JLabel lblNewLabel_3 = new JLabel("Valor gerado: ");
-        lblNewLabel_3.setBounds(139, 129, 111, 14);
-        lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 11));
-        panel_1.add(lblNewLabel_3);
+        JLabel lblValorGerado = new JLabel("Valor gerado: ");
+        lblValorGerado.setBounds(139, 129, 111, 14);
+        lblValorGerado.setFont(new Font("Tahoma", Font.BOLD, 11));
+        PanelMeio.add(lblValorGerado);
 
-        JTextArea textArea_4 = new JTextArea();
-        textArea_4.setBounds(139, 143, 156, 22);
-        panel_1.add(textArea_4);
+        JTextArea infoValorGerado = new JTextArea();
+        infoValorGerado.setBounds(139, 143, 156, 22);
+        PanelMeio.add(infoValorGerado);
+	        
+	    //Fim do vendas realizadas & valor gerado;
+        
+        //CheckBox Gênero
+        
+        JCheckBox checkboxHomem = new JCheckBox("Masculino");
+        checkboxHomem.setBounds(311, 40, 97, 23);
+        PanelMeio.add(checkboxHomem);
 
-        JCheckBox chckbxNewCheckBox = new JCheckBox("Masculino");
-        chckbxNewCheckBox.setBounds(311, 40, 97, 23);
-        panel_1.add(chckbxNewCheckBox);
+        JLabel lblGenero = new JLabel("Genêro:");
+        lblGenero.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lblGenero.setBounds(311, 25, 46, 14);
+        PanelMeio.add(lblGenero);
 
-        JLabel lblNewLabel_4 = new JLabel("Genêro:");
-        lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 11));
-        lblNewLabel_4.setBounds(311, 25, 46, 14);
-        panel_1.add(lblNewLabel_4);
-
-        JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Feminino");
-        chckbxNewCheckBox_1.setBounds(311, 60, 97, 23);
-        panel_1.add(chckbxNewCheckBox_1);
+        JCheckBox checkboxMulher = new JCheckBox("Feminino");
+        checkboxMulher.setBounds(311, 60, 97, 23);
+        PanelMeio.add(checkboxMulher);
 
         JSeparator separator = new JSeparator();
         separator.setForeground(new Color(0, 0, 0));
         separator.setBackground(new Color(0, 0, 0));
         separator.setOrientation(SwingConstants.VERTICAL);
         separator.setBounds(305, 23, 7, 142);
-        panel_1.add(separator);
+        PanelMeio.add(separator);
+        
+        //Fim do CheckBoxGênero
+        
+        //Data de admissão.
+        
+        JLabel lblDataAdmissao = new JLabel("Data de admissão:");
+        lblDataAdmissao.setFont(new Font("Tahoma", Font.BOLD, 10));
+        lblDataAdmissao.setBounds(311, 93, 150, 14);
+        PanelMeio.add(lblDataAdmissao);
 
-        JLabel lblNewLabel_5 = new JLabel("Data de admissão:");
-        lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 10));
-        lblNewLabel_5.setBounds(311, 93, 150, 14);
-        panel_1.add(lblNewLabel_5);
+        JTextArea infoDataAdmisao = new JTextArea();
+        infoDataAdmisao.setBounds(307, 105, 101, 22);
+        PanelMeio.add(infoDataAdmisao);
+        
+        //Fim da data de admissão.
 
-        JTextArea textArea_5 = new JTextArea();
-        textArea_5.setBounds(307, 105, 101, 22);
-        panel_1.add(textArea_5);
+        JButton btnMudarImagem = new JButton("Mudar foto");
+        btnMudarImagem.setForeground(new Color(255, 255, 255));
+        btnMudarImagem.setBackground(new Color(49, 62, 69));
+        btnMudarImagem.setBounds(10, 138, 117, 22);
+        PanelMeio.add(btnMudarImagem);
 
-        JButton btnNewButton_3 = new JButton("Mudar foto");
-        btnNewButton_3.setForeground(new Color(255, 255, 255));
-        btnNewButton_3.setBackground(new Color(49, 62, 69));
-        btnNewButton_3.setBounds(10, 138, 117, 22);
-        panel_1.add(btnNewButton_3);
+        btnMudarImagem.addActionListener(new ActionListener() {
 
-        btnNewButton_3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
@@ -210,12 +230,17 @@ public class JPerfil extends JFrame {
                     ImageIcon originalIcon = new ImageIcon(selectedFile.getPath());
                     // Redimensionar a imagem
                     Image originalImage = originalIcon.getImage();
-                    Image resizedImage = originalImage.getScaledInstance(imagemLabel.getWidth(), imagemLabel.getHeight(), Image.SCALE_SMOOTH);
+                    Image resizedImage = originalImage.getScaledInstance(lblImagem.getWidth(), lblImagem.getHeight(), Image.SCALE_SMOOTH);
                     ImageIcon resizedIcon = new ImageIcon(resizedImage);
-                    imagemLabel.setIcon(resizedIcon);
-                    imagemLabel.setText(null);
+                    lblImagem.setIcon(resizedIcon);
+                    lblImagem.setText(null);
+       
                 }
             }
+          
         });
+        
+        //Fim do painel do meio.
+        
     }
 }

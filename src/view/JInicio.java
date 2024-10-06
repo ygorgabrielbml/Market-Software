@@ -18,12 +18,12 @@ import javax.swing.JTextField;
 public class JInicio extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+	private JPanel PanelGeral;
 	private JTextField txtPesquisa;
 
-	/**
-	 * Launch the application.
-	 */
+	
+	//Launch the application.
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -38,32 +38,33 @@ public class JInicio extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	
+	//Create the frame.
+	 
 	public JInicio() {	
-		setTitle("Principal");
+		setTitle("Início");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBackground(new Color(184, 134, 11));
-		contentPane.setForeground(Color.WHITE);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		PanelGeral = new JPanel();
+		PanelGeral.setBackground(new Color(184, 134, 11));
+		PanelGeral.setForeground(Color.WHITE);
+		PanelGeral.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(PanelGeral);
+		PanelGeral.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(218, 165, 32));
-		panel.setBounds(0, 0, 434, 47);
-		contentPane.add(panel);
-		panel.setLayout(null);
+		//Início do Header.
 		
-		JButton btnEstoquePage = new JButton("Estoque");
-		btnEstoquePage.setBounds(165, 11, 89, 23);
-		panel.add(btnEstoquePage);
-		btnEstoquePage.addActionListener(new ActionListener() { // Corrigido para usar btnEstoque
+		JPanel Header = new JPanel();
+		Header.setBackground(new Color(218, 165, 32));
+		Header.setBounds(0, 0, 434, 47);
+		PanelGeral.add(Header);
+		Header.setLayout(null);
+		
+		JButton btnEstoque = new JButton("Estoque");
+		btnEstoque.setBounds(165, 11, 89, 23);
+		Header.add(btnEstoque);
+		btnEstoque.addActionListener(new ActionListener() { 
             @Override
             public void actionPerformed(ActionEvent e) {
                 JEstoque estoqueFrame = new JEstoque();
@@ -78,8 +79,10 @@ public class JInicio extends JFrame {
             }
         });
 		
-		JButton btnPerfilPage = new JButton("Perfil");
-		btnPerfilPage.addActionListener(new ActionListener() {
+		JButton btnPerfil = new JButton("Perfil");
+		btnPerfil.setBounds(335, 11, 89, 23);
+		Header.add(btnPerfil);
+		btnPerfil.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
 		        JPerfil perfilFrame = new JPerfil();
@@ -94,13 +97,11 @@ public class JInicio extends JFrame {
 		        dispose();
 		    }
 		});
-		btnPerfilPage.setBounds(335, 11, 89, 23);
-		panel.add(btnPerfilPage);
-		
-		JButton btnNewButton = new JButton("Compras");
-		btnNewButton.setBounds(10, 11, 89, 23);
-		panel.add(btnNewButton);
-		btnNewButton.addActionListener(new ActionListener() {
+	
+		JButton btnCompras = new JButton("Compras");
+		btnCompras.setBounds(10, 11, 89, 23);
+		Header.add(btnCompras);
+		btnCompras.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JCompras comprasFrame = new JCompras();
@@ -115,23 +116,29 @@ public class JInicio extends JFrame {
                 dispose();
             }
         });
+		
+		//Fim do Header.
 
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 58, 414, 192);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
+		//Inicio do painel do meio.
+		
+		JPanel PanelMeio = new JPanel();
+		PanelMeio.setBounds(10, 58, 414, 192);
+		PanelGeral.add(PanelMeio);
+		PanelMeio.setLayout(null);
+		
+		//Início do campo de pesquisa.
 		
 		txtPesquisa = new JTextField();
 		txtPesquisa.setBounds(10, 11, 287, 20);
-		panel_1.add(txtPesquisa);
+		PanelMeio.add(txtPesquisa);
 		txtPesquisa.setColumns(10);
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.setForeground(new Color(255, 255, 255));
 		btnPesquisar.setBackground(new Color(49, 62, 69));
 		btnPesquisar.setBounds(308, 11, 96, 20);
-		panel_1.add(btnPesquisar);
+		PanelMeio.add(btnPesquisar);
 		btnPesquisar.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        // Obtém o texto do campo de pesquisa e exibe uma mensagem
@@ -139,5 +146,11 @@ public class JInicio extends JFrame {
 		        JOptionPane.showMessageDialog(null, "Você pesquisou por: " + textoPesquisa);
 		    }
 		});
+		
+		//Fim do campo de pesquisa.
+		
+		
+		//Fim do painel do meio.
+		
 	}
 }

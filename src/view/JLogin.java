@@ -1,11 +1,12 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,104 +16,115 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class JLogin {
+public class JLogin extends JFrame {
 
-	private JFrame frame;
-	private JTextField txtUsuario;
-	private JPasswordField txtSenha;
+    private static final long serialVersionUID = 1L;
+    private JPanel PanelGeral;
+    private JTextField txtUsuario;
+    private JPasswordField txtSenha;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JLogin window = new JLogin();
-					window.frame.setLocationRelativeTo(null);
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    // Método main para lançar a aplicação.
+    public static void main(String[] args) {
+        EventQueue.invokeLater(() -> {
+            try {
+                JLogin frame = new JLogin();
+                frame.setLocationRelativeTo(null); // Centraliza a janela
+                frame.setVisible(true); // Torna a janela visível
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
 
-	/**
-	 * Create the application.
-	 */
-	public JLogin() {
-		initialize();
-	}
+    // Cria a aplicação.
+    public JLogin() {
+        setTitle("Login");
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 450, 300);
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		
-		frame = new JFrame();
-		frame.setTitle("Login");
-		frame.getContentPane().setBackground(new Color(255, 165, 0));
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.setResizable(false);
-		
-		JLabel lblNewLabel = new JLabel("Login");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(188, 42, 46, 14);
-		frame.getContentPane().add(lblNewLabel);
-		
-		txtUsuario = new JTextField();
-		txtUsuario.setBounds(147, 88, 135, 20);
-		frame.getContentPane().add(txtUsuario);
-		txtUsuario.setColumns(10);
-		
-		JLabel lblNewLabel_1 = new JLabel("Usuário:");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_1.setBounds(147, 74, 58, 14);
-		frame.getContentPane().add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("Senha:");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_2.setBounds(147, 119, 58, 14);
-		frame.getContentPane().add(lblNewLabel_2);
-		
-		JButton btnNewButton = new JButton("Entrar");
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setBackground(new Color(49, 62, 69));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(txtUsuario.getText() != null && 
-						!txtUsuario.getText().isEmpty() &&
-						txtSenha.getPassword() != null && 
-					    !String.valueOf(txtSenha.getPassword()).isEmpty()){
-					JOptionPane.showMessageDialog(btnNewButton, "Acesso realizado!");
-				} else {
-					JOptionPane.showMessageDialog(btnNewButton, "Acesso negado, verifique se você preencheu os campos corretamente!", "Aviso", JOptionPane.WARNING_MESSAGE);
-				}
-			}
-		});
-		btnNewButton.setBounds(147, 164, 135, 23);
-		frame.getContentPane().add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Cadastrar");
-		btnNewButton_1.setForeground(Color.WHITE);
-		btnNewButton_1.setBackground(new Color(49, 62, 69));
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_1.setBounds(147, 198, 135, 23);
-		frame.getContentPane().add(btnNewButton_1);
-		
-		txtSenha = new JPasswordField();
-		txtSenha.setBounds(147, 133, 135, 20);
-		frame.getContentPane().add(txtSenha);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(113, 32, 200, 207);
-		frame.getContentPane().add(panel);
-	}
+        PanelGeral = new JPanel();
+        PanelGeral.setBackground(new Color(255, 165, 0));
+        setContentPane(PanelGeral);
+        PanelGeral.setLayout(null);
+
+        // Início do Login (usuario & senha).
+        JLabel lblLogin = new JLabel("Login");
+        lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
+        lblLogin.setFont(new Font("Tahoma", Font.BOLD, 14));
+        lblLogin.setBounds(147, 30, 150, 20);
+        PanelGeral.add(lblLogin);
+
+        JLabel lblUsuario = new JLabel("Usuário:");
+        lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lblUsuario.setBounds(147, 60, 58, 14);
+        PanelGeral.add(lblUsuario);
+
+        txtUsuario = new JTextField();
+        txtUsuario.setBounds(147, 75, 135, 20);
+        PanelGeral.add(txtUsuario);
+        txtUsuario.setColumns(10);
+
+        JLabel lblSenha = new JLabel("Senha:");
+        lblSenha.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lblSenha.setBounds(147, 110, 58, 14);
+        PanelGeral.add(lblSenha);
+
+        txtSenha = new JPasswordField();
+        txtSenha.setBounds(147, 125, 135, 20);
+        PanelGeral.add(txtSenha);
+        
+        // Início do Login (usuario & senha).
+
+        
+        //Início dos botões entrar e cadastrar.
+        
+        JButton btnEntrar = new JButton("Entrar");
+        btnEntrar.setForeground(Color.WHITE);
+        btnEntrar.setBackground(new Color(49, 62, 69));
+        btnEntrar.setBounds(147, 160, 135, 23);
+        PanelGeral.add(btnEntrar);
+        btnEntrar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (txtUsuario.getText() != null &&
+                    !txtUsuario.getText().isEmpty() &&
+                    txtSenha.getPassword() != null &&
+                    txtSenha.getPassword().length > 0) {
+                    JOptionPane.showMessageDialog(btnEntrar, "Acesso realizado!");
+                } else {
+                    JOptionPane.showMessageDialog(btnEntrar, "Acesso negado, verifique se você preencheu os campos corretamente!", "Aviso", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+
+        JButton btnCadastrar = new JButton("Cadastrar");
+        btnCadastrar.setForeground(Color.WHITE);
+        btnCadastrar.setBackground(new Color(49, 62, 69));
+        btnCadastrar.setBounds(147, 200, 135, 23);
+        PanelGeral.add(btnCadastrar);
+        btnCadastrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JCadastro cadastrarFrame = new JCadastro();
+
+                // Centraliza a janela
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                int x = (screenSize.width - cadastrarFrame.getWidth()) / 2;
+                int y = (screenSize.height - cadastrarFrame.getHeight()) / 2;
+                cadastrarFrame.setLocation(x, y);
+
+                // Exibe a nova janela e fecha a janela de login
+                cadastrarFrame.setVisible(true);
+                dispose(); // Fecha a janela de login
+            }
+        });
+        
+        //Fim dos botões entrar e cadastrar.
+
+        // Início do painel do meio.
+        JPanel PanelMeio = new JPanel();
+        PanelMeio.setBackground(new Color(255, 255, 255));
+        PanelMeio.setBounds(113, 20, 200, 230);
+        PanelGeral.add(PanelMeio);
+    }
 }

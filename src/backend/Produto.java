@@ -15,6 +15,8 @@ public class Produto {
 	private Integer id;
 	private int quantidade;
 
+	public Produto() {
+	}
 	public Produto(int id, String n, String cb, double v, int q) {
 		this.id = id;
 		this.nome = n;

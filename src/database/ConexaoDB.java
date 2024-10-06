@@ -10,13 +10,14 @@ public class ConexaoDB {
 
     private ConexaoDB() {
         try {
-            connection = DriverManager.getConnection(
-                "jdbc:sqlite:C:/Users/rique/eclipse-workspace/marketSoftware/database.db");
+            // Conectar ao banco de dados usando um caminho relativo
+            connection = DriverManager.getConnection("jdbc:sqlite:src/database/database.db");
         } catch (SQLException e) {
             System.err.println("Erro ao conectar ao banco de dados.");
             e.printStackTrace();
         }
     }
+
 
     public static ConexaoDB getInstance() {
         if (INSTANCE == null || INSTANCE.connection == null) {

@@ -14,63 +14,82 @@ public class Cadastro {
 	private int vendas;
 	private double valorGerado;
 	private String senha;
-	private int idUser;
-
-	public Cadastro(String nome, String cpf, String senha, int idUser, String genero) {
+	private String senha2;
+	private boolean genero;
+	
+	public Cadastro() {
+	}
+	
+	public Cadastro(String nome, String cpf, boolean genero, String senha, String senha2) {
+		super();
 		this.nome = nome;
 		this.cpf = cpf;
+		this.genero = genero;
 		this.senha = senha;
-		this.idUser = idUser;
+		this.senha2 = senha2;
 	}
+
+	
 
 	public String getNome() {
 		return nome;
 	}
 
+
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+
 
 	public String getCpf() {
 		return cpf;
 	}
 
+
+
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
-	public int getVendas() {
-		return vendas;
-	}
 
-	public void setVendas(int vendas) {
-		this.vendas = vendas;
-	}
-
-	public double getValorGerado() {
-		return valorGerado;
-	}
-
-	public void setValorGerado(double valorGerado) {
-		this.valorGerado = valorGerado;
-	}
 
 	public String getSenha() {
 		return senha;
 	}
+
+
 
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 
 
-	public int getIdUser() {
-		return idUser;
+
+	public String getSenha2() {
+		return senha2;
 	}
 
-	public void setIdUser(int idUser) {
-		this.idUser = idUser;
+
+
+	public void setSenha2(String senha2) {
+		this.senha2 = senha2;
 	}
+
+
+
+	public boolean isGenero() {
+		return genero;
+	}
+
+
+
+	public void setGenero(boolean genero) {
+		this.genero = genero;
+	}
+
+
 
 	public static void registro(int id, String nome, String cpf, String senha) {
 		Connection con = null;
