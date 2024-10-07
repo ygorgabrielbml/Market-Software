@@ -185,7 +185,7 @@ public class JPerfil extends JFrame {
         JTextArea infoValorGerado = new JTextArea();
         infoValorGerado.setBounds(139, 143, 156, 22);
         infoValorGerado.setEnabled(false);
-        infoValorGerado.setText("A");
+        infoValorGerado.setText("");
         PanelMeio.add(infoValorGerado);
 	        
 	    //Fim do vendas realizadas & valor gerado;
