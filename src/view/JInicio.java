@@ -6,7 +6,6 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import backend.Carrinho;
 
@@ -106,6 +105,12 @@ public class JInicio extends JFrame {
             modelLista.clear(); // Limpa a lista atual
             for (Carrinho produto : produtosEncontrados) {
                 modelLista.addElement(produto); // Adiciona os produtos encontrados à lista
+            }
+            if (produtosEncontrados.isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "Nenhum produto encontrado.",
+                        "Resultado da Pesquisa",
+                        JOptionPane.INFORMATION_MESSAGE);
             }
         });
 
