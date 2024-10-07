@@ -58,7 +58,7 @@ public class Usuario {
 	}
 
 	public boolean isGenero() {
-		return genero;
+		return this.genero;
 	}
 
 	public void setGenero(boolean genero) {

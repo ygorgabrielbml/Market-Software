@@ -95,10 +95,11 @@ public class Produto {
 		Connection con = null;
 		try {
 			con = ConexaoDB.getInstance().getConnection();
-			String query = "DELETE FROM produtos WHERE CB = ?";
+			String query = "DELETE FROM produtos WHERE CB = ? OR nome = ?";
 			PreparedStatement pstmt = con.prepareStatement(query);
 
 			pstmt.setString(1, cb);
+			pstmt.setString(2, cb);
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {

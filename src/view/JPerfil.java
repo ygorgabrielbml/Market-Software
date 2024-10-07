@@ -9,7 +9,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -32,7 +31,7 @@ public class JPerfil extends JFrame {
 	private JPanel PanelGeral;
 	private JLabel lblImagem;
 	private Image originalImage;
-
+	Usuario usuario;
 	// Launch the application.
 
 	public static void main(String[] args) {
@@ -61,7 +60,8 @@ public class JPerfil extends JFrame {
 		PanelGeral.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(PanelGeral);
 		PanelGeral.setLayout(null);
-		Usuario usuario = JLogin.l1;
+		usuario = JLogin.l1;
+		System.out.println(usuario.isGenero());
 
 		// Inicio do Header.
 
@@ -200,10 +200,6 @@ public class JPerfil extends JFrame {
 		infoValorGerado.setBounds(137, 143, 156, 22);
 		PanelMeio.add(infoValorGerado);
 
-		JLabel lblGenero = new JLabel("Genêro:");
-		lblGenero.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblGenero.setBounds(303, 25, 46, 14);
-		PanelMeio.add(lblGenero);
 
 		JSeparator separator = new JSeparator();
 		separator.setForeground(new Color(0, 0, 0));

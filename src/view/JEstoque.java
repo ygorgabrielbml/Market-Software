@@ -244,6 +244,12 @@ public class JEstoque extends JFrame {
 		btnRemoverProduto.setBackground(new Color(49, 62, 69));
 		btnRemoverProduto.setBounds(10, 195, 195, 30);
 		panelRemoverProdutos.add(btnRemoverProduto);
+		btnRemoverProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String texto = textField.getText();
+				Produto.remProduto(texto);
+				textField.setText("");
+			}});
 		// Fim do painel de remover produtos.
 	}
 }
