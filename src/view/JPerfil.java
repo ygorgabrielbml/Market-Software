@@ -3,9 +3,6 @@ package view;
 import java.awt.EventQueue;
 import javax.swing.JFileChooser;
 import java.io.File;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.*;
@@ -13,9 +10,6 @@ import java.awt.event.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import backend.Usuario;
-
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -25,13 +19,12 @@ import javax.swing.JCheckBox;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
-
 public class JPerfil extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel PanelGeral;
     private JLabel lblImagem;
-    
+
     
      // Launch the application.
      
@@ -61,7 +54,7 @@ public class JPerfil extends JFrame {
         PanelGeral.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(PanelGeral);
         PanelGeral.setLayout(null);
-        Usuario usuario = JLogin.l1;
+
         //Inicio do Header.
         
         JPanel Header = new JPanel();
@@ -138,30 +131,23 @@ public class JPerfil extends JFrame {
         PanelMeio.add(lblImagem);
 
         //Inicio do nome & cpf do funcionário.
-        ArrayList<String> infos = null;
-		try {
-			infos = usuario.mostrarInfos();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        System.out.println(infos);
-        JLabel infoNome = new JLabel(infos.get(0));
-        infoNome.setBounds(139, 39, 156, 22);
+        
+        JTextArea infoNome = new JTextArea();
+        infoNome.setBounds(137, 39, 156, 22);
         PanelMeio.add(infoNome);
 
         JLabel lblNome = new JLabel("Nome:");
-        lblNome.setBounds(139, 25, 46, 14);
+        lblNome.setBounds(137, 25, 46, 14);
         lblNome.setFont(new Font("Tahoma", Font.BOLD, 11));
         PanelMeio.add(lblNome);
 
         JLabel lblCPF = new JLabel("CPF:");
-        lblCPF.setBounds(139, 60, 46, 14);
+        lblCPF.setBounds(137, 60, 46, 14);
         lblCPF.setFont(new Font("Tahoma", Font.BOLD, 11));
         PanelMeio.add(lblCPF);
 
-        JLabel infoCPF = new JLabel(infos.get(1));
-        infoCPF.setBounds(139, 72, 156, 22);
+        JTextArea infoCPF = new JTextArea();
+        infoCPF.setBounds(137, 72, 156, 22);
         PanelMeio.add(infoCPF);
 
         //Fim do nome & cpf do funcionário.
@@ -169,47 +155,33 @@ public class JPerfil extends JFrame {
         //Inicio do vendas realizadas & valor gerado;
         
         JLabel lblVendasRealizadas = new JLabel("Vendas realizadas:");
-        lblVendasRealizadas.setBounds(139, 93, 126, 14);
+        lblVendasRealizadas.setBounds(137, 93, 126, 14);
         lblVendasRealizadas.setFont(new Font("Tahoma", Font.BOLD, 11));
         PanelMeio.add(lblVendasRealizadas);
 
         JTextArea infoVendasRealizadas = new JTextArea();
-        infoVendasRealizadas.setBounds(139, 105, 156, 22);
+        infoVendasRealizadas.setBounds(137, 105, 156, 22);
         PanelMeio.add(infoVendasRealizadas);
 
         JLabel lblValorGerado = new JLabel("Valor gerado: ");
-        lblValorGerado.setBounds(139, 129, 111, 14);
+        lblValorGerado.setBounds(137, 129, 111, 14);
         lblValorGerado.setFont(new Font("Tahoma", Font.BOLD, 11));
         PanelMeio.add(lblValorGerado);
 
         JTextArea infoValorGerado = new JTextArea();
-        infoValorGerado.setBounds(139, 143, 156, 22);
-        infoValorGerado.setEnabled(false);
-        infoValorGerado.setText("");
+        infoValorGerado.setBounds(137, 143, 156, 22);
         PanelMeio.add(infoValorGerado);
-	        
-	    //Fim do vendas realizadas & valor gerado;
-        
-        //CheckBox Gênero
-        
-        JCheckBox checkboxHomem = new JCheckBox("Masculino");
-        checkboxHomem.setBounds(311, 40, 97, 23);
-        PanelMeio.add(checkboxHomem);
 
         JLabel lblGenero = new JLabel("Genêro:");
         lblGenero.setFont(new Font("Tahoma", Font.BOLD, 11));
-        lblGenero.setBounds(311, 25, 46, 14);
+        lblGenero.setBounds(303, 25, 46, 14);
         PanelMeio.add(lblGenero);
-
-        JCheckBox checkboxMulher = new JCheckBox("Feminino");
-        checkboxMulher.setBounds(311, 60, 97, 23);
-        PanelMeio.add(checkboxMulher);
 
         JSeparator separator = new JSeparator();
         separator.setForeground(new Color(0, 0, 0));
         separator.setBackground(new Color(0, 0, 0));
         separator.setOrientation(SwingConstants.VERTICAL);
-        separator.setBounds(305, 23, 7, 142);
+        separator.setBounds(303, 25, 0, 142);
         PanelMeio.add(separator);
         
         //Fim do CheckBoxGênero
@@ -217,12 +189,12 @@ public class JPerfil extends JFrame {
         //Data de admissão.
         
         JLabel lblDataAdmissao = new JLabel("Data de admissão:");
-        lblDataAdmissao.setFont(new Font("Tahoma", Font.BOLD, 10));
-        lblDataAdmissao.setBounds(311, 93, 150, 14);
+        lblDataAdmissao.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lblDataAdmissao.setBounds(303, 93, 150, 14);
         PanelMeio.add(lblDataAdmissao);
 
         JTextArea infoDataAdmisao = new JTextArea();
-        infoDataAdmisao.setBounds(307, 105, 101, 22);
+        infoDataAdmisao.setBounds(303, 105, 101, 22);
         PanelMeio.add(infoDataAdmisao);
         
         //Fim da data de admissão.
@@ -232,6 +204,10 @@ public class JPerfil extends JFrame {
         btnMudarImagem.setBackground(new Color(49, 62, 69));
         btnMudarImagem.setBounds(10, 138, 117, 22);
         PanelMeio.add(btnMudarImagem);
+        
+        JTextArea infoDataAdmisao_1 = new JTextArea();
+        infoDataAdmisao_1.setBounds(303, 39, 101, 22);
+        PanelMeio.add(infoDataAdmisao_1);
 
         btnMudarImagem.addActionListener(new ActionListener() {
 

@@ -1,8 +1,10 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -74,14 +76,14 @@ public class JCadastro extends JFrame {
         PanelMeio.add(btnCriar);
         btnCriar.setForeground(Color.WHITE);
         btnCriar.setBackground(new Color(49, 62, 69));
-        btnCriar.addActionListener(new ActionListener() {
+        btnCriar.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) {
                 if (txtNome.getText().trim().isEmpty()) {
-                	JOptionPane.showMessageDialog(JCadastro.this, "É preciso inserir um nome.");
-                	return;
+                    JOptionPane.showMessageDialog(JCadastro.this, "É preciso inserir um nome.");
+                    return;
                 }
-            	
-            	// Verifica se as senhas são iguais
+
+                // Verifica se as senhas são iguais
                 if (!new String(txtSenha.getPassword()).equals(new String(txtSenha2.getPassword()))) {
                     JOptionPane.showMessageDialog(JCadastro.this, "As senhas não coincidem.");
                     return;
@@ -104,23 +106,35 @@ public class JCadastro extends JFrame {
                 LocalDate dataAtual = LocalDate.now();
                 DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 String dataFormatada = dataAtual.format(formato);
-                Usuario usuario = new Usuario();
-                usuario.setDataAdmissao(dataFormatada);
-                usuario.setNome(txtNome.getText());
-                usuario.setCpf(cpf);
-                
-                // Obtendo o valor selecionado do JComboBox
-                String generoSelecionado = (String) comboboxHomemMulher.getSelectedItem();
-                boolean genero = "Masculino".equals(generoSelecionado); // true se "Masculino", false se "Feminino"
-
-                usuario.setGenero(genero); // Atribuindo o valor booleano ao objeto Cadastro
-                usuario.setSenha(new String(txtSenha.getPassword()));
-                String mensagem = usuario.registro();
 
                 // Aqui você pode usar o objeto 'cadastro' conforme necessário
-                JOptionPane.showMessageDialog(JCadastro.this, mensagem);
+                int opcao = JOptionPane.showConfirmDialog(JCadastro.this,"Cadastro realizado com sucesso.", "Cadastro", JOptionPane.OK_CANCEL_OPTION);
+
+                // Se o usuário clicar em "Ok", redirecionar para a página de login
+                if (opcao == JOptionPane.OK_OPTION) {
+                    // Trocar para a tela de login
+                	Usuario usuario = new Usuario();
+                	usuario.setDataAdmissao(dataFormatada);
+                    usuario.setNome(txtNome.getText());
+                    usuario.setCpf(cpf);
+                    String generoSelecionado = (String) comboboxHomemMulher.getSelectedItem();
+                    boolean genero = "Masculino".equals(generoSelecionado); // true se "Masculino", false se "Feminino"
+
+                    usuario.setGenero(genero); // Atribuindo o valor booleano ao objeto Cadastro
+                    usuario.setSenha(new String(txtSenha.getPassword()));
+                    String mensagem = usuario.registro();
+
+                	JLogin loginFrame = new JLogin(); // Supondo que JLogin seja a classe de login
+                	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    		        int x = (screenSize.width - loginFrame.getWidth()) / 2;
+    		        int y = (screenSize.height - loginFrame.getHeight()) / 2;
+    		        loginFrame.setLocation(x, y);
+                	loginFrame.setVisible(true); // Exibir a tela de login
+                    JCadastro.this.dispose(); // Fechar a tela de cadastro atual
+                }
             }
         });
+
 
         JLabel lblCadastro = new JLabel("Cadastro");
         lblCadastro.setFont(new Font("Tahoma", Font.BOLD, 11));
