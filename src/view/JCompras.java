@@ -1,8 +1,10 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -68,14 +70,57 @@ public class JCompras extends JFrame {
         JButton btnPerfil = new JButton("Perfil");
         btnPerfil.setBounds(10, 11, 89, 23);
         Header.add(btnPerfil);
+        btnPerfil.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        JPerfil perfilFrame = new JPerfil();
+
+		        // Centraliza a janela
+		        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		        int x = (screenSize.width - perfilFrame.getWidth()) / 2;
+		        int y = (screenSize.height - perfilFrame.getHeight()) / 2;
+		        perfilFrame.setLocation(x, y);
+		        
+		        perfilFrame.setVisible(true);
+		        dispose();
+		    }
+		});
 
         JButton btnEstoque = new JButton("Estoque");
         btnEstoque.setBounds(239, 11, 89, 23);
         Header.add(btnEstoque);
+        btnEstoque.addActionListener(new ActionListener() { 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JEstoque estoqueFrame = new JEstoque();
+
+                // Centraliza a janela
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                int x = (screenSize.width - estoqueFrame.getWidth()) / 2;
+                int y = (screenSize.height - estoqueFrame.getHeight()) / 2;
+                estoqueFrame.setLocation(x, y);
+                estoqueFrame.setVisible(true);
+                dispose();
+            }
+        });
 
         JButton btnInicio = new JButton("Inicio");
         btnInicio.setBounds(465, 11, 89, 23);
         Header.add(btnInicio);
+        btnInicio.addActionListener(new ActionListener() {             
+        	@Override
+                    public void actionPerformed(ActionEvent e) {
+                        JInicio inicioFrame = new JInicio();
+
+                        // Centraliza a janela
+                        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                        int x = (screenSize.width - inicioFrame.getWidth()) / 2;
+                        int y = (screenSize.height - inicioFrame.getHeight()) / 2;
+                        inicioFrame.setLocation(x, y);
+                        inicioFrame.setVisible(true);
+                        dispose();
+                    }
+                });
 
         JPanel PanelMeio = new JPanel();
         PanelMeio.setBounds(10, 62, 544, 339);
