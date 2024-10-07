@@ -9,7 +9,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -222,7 +221,6 @@ public class JPerfil extends JFrame {
 		PanelMeio.add(lblDataAdmissao);
 
 		JLabel infoDataAdmisao = new JLabel(infos.get(2));
-		System.out.println(infos.get(2));
 		infoDataAdmisao.setBounds(303, 105, 101, 22);
 		PanelMeio.add(infoDataAdmisao);
 
