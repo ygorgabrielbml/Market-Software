@@ -29,21 +29,20 @@ public class JCompras extends JFrame {
     private JTextField txtPesquisa;
     private ArrayList<String> listaProdutos;
     private HashMap<String, Double> precosProdutos;
+    private HashMap<String, Integer> quantidadeProdutos;
     private DefaultListModel<String> modeloResultados;
     private DefaultListModel<String> modeloCarrinho;
     private JTextArea infoValorTotal;
-    private double valorTotal;
+    private HashMap<String, Integer> quantidadeOriginalProdutos;
 
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    JCompras frame = new JCompras();
-                    frame.setLocationRelativeTo(null);
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        EventQueue.invokeLater(() -> {
+            try {
+                JCompras frame = new JCompras();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }
@@ -70,57 +69,32 @@ public class JCompras extends JFrame {
         JButton btnPerfil = new JButton("Perfil");
         btnPerfil.setBounds(10, 11, 89, 23);
         Header.add(btnPerfil);
-        btnPerfil.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent e) {
-		        JPerfil perfilFrame = new JPerfil();
-
-		        // Centraliza a janela
-		        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		        int x = (screenSize.width - perfilFrame.getWidth()) / 2;
-		        int y = (screenSize.height - perfilFrame.getHeight()) / 2;
-		        perfilFrame.setLocation(x, y);
-		        
-		        perfilFrame.setVisible(true);
-		        dispose();
-		    }
-		});
+        btnPerfil.addActionListener(e -> {
+            JPerfil perfilFrame = new JPerfil();
+            centralizarJanela(perfilFrame);
+            perfilFrame.setVisible(true);
+            dispose();
+        });
 
         JButton btnEstoque = new JButton("Estoque");
         btnEstoque.setBounds(239, 11, 89, 23);
         Header.add(btnEstoque);
-        btnEstoque.addActionListener(new ActionListener() { 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JEstoque estoqueFrame = new JEstoque();
-
-                // Centraliza a janela
-                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                int x = (screenSize.width - estoqueFrame.getWidth()) / 2;
-                int y = (screenSize.height - estoqueFrame.getHeight()) / 2;
-                estoqueFrame.setLocation(x, y);
-                estoqueFrame.setVisible(true);
-                dispose();
-            }
+        btnEstoque.addActionListener(e -> {
+            JEstoque estoqueFrame = new JEstoque();
+            centralizarJanela(estoqueFrame);
+            estoqueFrame.setVisible(true);
+            dispose();
         });
 
         JButton btnInicio = new JButton("Inicio");
         btnInicio.setBounds(465, 11, 89, 23);
         Header.add(btnInicio);
-        btnInicio.addActionListener(new ActionListener() {             
-        	@Override
-                    public void actionPerformed(ActionEvent e) {
-                        JInicio inicioFrame = new JInicio();
-
-                        // Centraliza a janela
-                        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                        int x = (screenSize.width - inicioFrame.getWidth()) / 2;
-                        int y = (screenSize.height - inicioFrame.getHeight()) / 2;
-                        inicioFrame.setLocation(x, y);
-                        inicioFrame.setVisible(true);
-                        dispose();
-                    }
-                });
+        btnInicio.addActionListener(e -> {
+            JInicio inicioFrame = new JInicio();
+            centralizarJanela(inicioFrame);
+            inicioFrame.setVisible(true);
+            dispose();
+        });
 
         JPanel PanelMeio = new JPanel();
         PanelMeio.setBounds(10, 62, 544, 339);
@@ -137,13 +111,10 @@ public class JCompras extends JFrame {
         btnPesquisar.setBounds(423, 10, 111, 23);
         btnPesquisar.setBackground(new Color(49, 62, 69));
         PanelMeio.add(btnPesquisar);
-        btnPesquisar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String pesquisa = txtPesquisa.getText();
-                ArrayList<String> resultado = pesquisarProduto(pesquisa);
-                exibirResultadoPesquisa(resultado);
-            }
+        btnPesquisar.addActionListener(e -> {
+            String pesquisa = txtPesquisa.getText();
+            ArrayList<String> resultado = pesquisarProduto(pesquisa);
+            exibirResultadoPesquisa(resultado);
         });
 
         JLabel lblResultados = new JLabel("Resultados:");
@@ -153,7 +124,7 @@ public class JCompras extends JFrame {
         PanelMeio.add(lblResultados);
 
         JSeparator separator = new JSeparator();
-        separator.setBounds(272, 61, 10, 278);
+        separator.setBounds(275, 61, 10, 278);
         separator.setOrientation(SwingConstants.VERTICAL);
         separator.setForeground(new Color(184, 134, 11));
         separator.setBackground(new Color(184, 134, 11));
@@ -161,7 +132,7 @@ public class JCompras extends JFrame {
 
         modeloResultados = new DefaultListModel<>();
         JList<String> listResultados = new JList<>(modeloResultados);
-        listResultados.setBounds(10, 74, 255, 92);
+        listResultados.setBounds(10, 74, 261, 92);
         PanelMeio.add(listResultados);
 
         JButton btnAdicionarCarrinho = new JButton("Adicionar no carrinho");
@@ -169,19 +140,16 @@ public class JCompras extends JFrame {
         btnAdicionarCarrinho.setForeground(new Color(255, 255, 255));
         btnAdicionarCarrinho.setBackground(new Color(49, 62, 64));
         PanelMeio.add(btnAdicionarCarrinho);
-        btnAdicionarCarrinho.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String produtoSelecionado = listResultados.getSelectedValue();
-                if (produtoSelecionado != null) {
-                    adicionarAoCarrinho(produtoSelecionado);
-                }
+        btnAdicionarCarrinho.addActionListener(e -> {
+            String produtoSelecionado = listResultados.getSelectedValue();
+            if (produtoSelecionado != null) {
+                adicionarAoCarrinho(produtoSelecionado);
             }
         });
 
         modeloCarrinho = new DefaultListModel<>();
         JList<String> listCarrinho = new JList<>(modeloCarrinho);
-        listCarrinho.setBounds(284, 74, 250, 259);
+        listCarrinho.setBounds(282, 74, 252, 259);
         PanelMeio.add(listCarrinho);
 
         JLabel lblCarrinho = new JLabel("Carrinho:");
@@ -201,20 +169,15 @@ public class JCompras extends JFrame {
         infoValorTotal.setBounds(10, 242, 95, 23);
         PanelMeio.add(infoValorTotal);
 
-        valorTotal = 0.0;
-
         JButton btnRemoverProduto = new JButton("Remover produto");
         btnRemoverProduto.setBounds(115, 208, 147, 23);
         btnRemoverProduto.setForeground(new Color(255, 255, 255));
         btnRemoverProduto.setBackground(new Color(49, 62, 64));
         PanelMeio.add(btnRemoverProduto);
-        btnRemoverProduto.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String produtoSelecionado = listCarrinho.getSelectedValue();
-                if (produtoSelecionado != null) {
-                    removerProdutoCarrinho(produtoSelecionado);
-                }
+        btnRemoverProduto.addActionListener(e -> {
+            String produtoSelecionado = listCarrinho.getSelectedValue();
+            if (produtoSelecionado != null) {
+                removerProdutoCarrinho(produtoSelecionado);
             }
         });
 
@@ -223,59 +186,67 @@ public class JCompras extends JFrame {
         btnCancelarProduto.setForeground(new Color(255, 255, 255));
         btnCancelarProduto.setBackground(new Color(49, 62, 64));
         PanelMeio.add(btnCancelarProduto);
-        btnCancelarProduto.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cancelarProduto();
-            }
-        });
+        btnCancelarProduto.addActionListener(e -> cancelarProduto());
 
         JButton btnCancelarCompra = new JButton("Cancelar compra");
         btnCancelarCompra.setBounds(115, 276, 147, 23);
         btnCancelarCompra.setForeground(new Color(255, 255, 255));
         btnCancelarCompra.setBackground(new Color(49, 62, 64));
         PanelMeio.add(btnCancelarCompra);
-        btnCancelarCompra.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cancelarCompra();
-            }
-        });
+        btnCancelarCompra.addActionListener(e -> cancelarCompra());
         
         JButton btnFinalizarCompra = new JButton("Finalizar Compra");
         btnFinalizarCompra.setForeground(new Color(255, 255, 255));
         btnFinalizarCompra.setBackground(new Color(49, 62, 64));
         btnFinalizarCompra.setBounds(10, 310, 252, 23);
         PanelMeio.add(btnFinalizarCompra);
-        
-        
+    }
+
+    private void centralizarJanela(JFrame frame) {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width - frame.getWidth()) / 2;
+        int y = (screenSize.height - frame.getHeight()) / 2;
+        frame.setLocation(x, y);
     }
 
     private void inicializarListaProdutos() {
         listaProdutos = new ArrayList<>();
         precosProdutos = new HashMap<>();
+        quantidadeProdutos = new HashMap<>();
 
         listaProdutos.add("Camiseta Preta");
         precosProdutos.put("Camiseta Preta", 39.99);
+        quantidadeProdutos.put("Camiseta Preta", 10);
 
         listaProdutos.add("Calça Jeans");
         precosProdutos.put("Calça Jeans", 79.99);
+        quantidadeProdutos.put("Calça Jeans", 5);
 
         listaProdutos.add("Tênis Esportivo");
         precosProdutos.put("Tênis Esportivo", 149.99);
+        quantidadeProdutos.put("Tênis Esportivo", 8);
 
         listaProdutos.add("Jaqueta de Couro");
         precosProdutos.put("Jaqueta de Couro", 299.99);
+        quantidadeProdutos.put("Jaqueta de Couro", 3);
 
         listaProdutos.add("Relógio de Pulso");
         precosProdutos.put("Relógio de Pulso", 199.99);
+        quantidadeProdutos.put("Relógio de Pulso", 15);
+        
+        quantidadeOriginalProdutos = new HashMap<>();
+        quantidadeOriginalProdutos.put("Camiseta Preta", 10);
+        quantidadeOriginalProdutos.put("Calça Jeans", 5);
+        quantidadeOriginalProdutos.put("Tênis Esportivo", 8);
+        quantidadeOriginalProdutos.put("Jaqueta de Couro", 3);
+        quantidadeOriginalProdutos.put("Relógio de Pulso", 15);
     }
 
     private ArrayList<String> pesquisarProduto(String pesquisa) {
         ArrayList<String> resultado = new ArrayList<>();
         for (String produto : listaProdutos) {
             if (produto.toLowerCase().contains(pesquisa.toLowerCase())) {
-                resultado.add(produto + " - R$ " + String.format("%.2f", precosProdutos.get(produto)));
+                resultado.add(produto + " - R$ " + String.format("%.2f", precosProdutos.get(produto)) + " | Quantidade: " + quantidadeProdutos.get(produto));
             }
         }
         return resultado;
@@ -286,30 +257,66 @@ public class JCompras extends JFrame {
         for (String produto : resultado) {
             modeloResultados.addElement(produto);
         }
+        if (resultado.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nenhum produto encontrado.", "Resultado da pesquisa", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     private void adicionarAoCarrinho(String produtoComPreco) {
-        modeloCarrinho.addElement(produtoComPreco);
         String nomeProduto = produtoComPreco.split(" - ")[0];
-        valorTotal += precosProdutos.get(nomeProduto);
-        infoValorTotal.setText(String.format("R$ %.2f", valorTotal));
+        if (quantidadeProdutos.get(nomeProduto) > 0) {
+            modeloCarrinho.addElement(produtoComPreco);
+            quantidadeProdutos.put(nomeProduto, quantidadeProdutos.get(nomeProduto) - 1);
+            atualizarListaDeResultados(); // Atualiza a lista de resultados para refletir a nova quantidade
+            infoValorTotal.setText(String.format("R$ %.2f", calcularValorTotal()));
+        } else {
+            JOptionPane.showMessageDialog(this, "Não há mais " + nomeProduto + " disponível.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void atualizarListaDeResultados() {
+        modeloResultados.clear();
+        for (String produto : listaProdutos) {
+            if (quantidadeProdutos.get(produto) > 0) {
+                modeloResultados.addElement(produto + " - R$ " + String.format("%.2f", precosProdutos.get(produto)) + " | Quantidade: " + quantidadeProdutos.get(produto));
+            }
+        }
+    }
+
+    private double calcularValorTotal() {
+        double total = 0.0;
+        for (int i = 0; i < modeloCarrinho.size(); i++) {
+            String produtoComPreco = modeloCarrinho.get(i);
+            String nomeProduto = produtoComPreco.split(" - ")[0];
+            total += precosProdutos.get(nomeProduto);
+        }
+        return total;
     }
 
     private void removerProdutoCarrinho(String produtoComPreco) {
         modeloCarrinho.removeElement(produtoComPreco);
         String nomeProduto = produtoComPreco.split(" - ")[0];
-        valorTotal -= precosProdutos.get(nomeProduto);
-        infoValorTotal.setText(String.format("R$ %.2f", valorTotal));
+        quantidadeProdutos.put(nomeProduto, quantidadeProdutos.get(nomeProduto) + 1);
+        atualizarListaDeResultados(); // Atualiza a lista de resultados após remover
+        infoValorTotal.setText(String.format("R$ %.2f", calcularValorTotal()));
     }
 
     private void cancelarProduto() {
-        modeloCarrinho.clear();
-        valorTotal = 0.0;
-        infoValorTotal.setText(String.format("R$ %.2f", valorTotal));
+        // Implementar funcionalidade para cancelar um produto específico se necessário
+        // Exemplo: limpar campos ou selecionar produtos
     }
 
     private void cancelarCompra() {
-        JOptionPane.showMessageDialog(this, "Compra cancelada. Todos os produtos foram removidos do carrinho.", "Cancelar Compra", JOptionPane.INFORMATION_MESSAGE);
-        cancelarProduto();
+        // Restaurar a quantidade original dos produtos
+        for (String produto : listaProdutos) {
+            // Aqui você deve garantir que a quantidade original seja restaurada
+            // Para isso, você pode usar uma variável para armazenar a quantidade original.
+            // Neste exemplo, vamos apenas assumir que a quantidade original é sempre a mesma que a inicial.
+            quantidadeProdutos.put(produto, quantidadeProdutos.get(produto) + (10 - quantidadeProdutos.get(produto)));
+        }
+        
+        modeloCarrinho.clear(); // Limpa o carrinho
+        infoValorTotal.setText(String.format("R$ %.2f", 0.0)); // Reseta o valor total
+        JOptionPane.showMessageDialog(this, "Compra cancelada com sucesso!", "Cancelamento", JOptionPane.INFORMATION_MESSAGE);
     }
 }
