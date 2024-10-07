@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -22,6 +24,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import backend.InfoPlus;
 import backend.Usuario;
 
 public class JCadastro extends JFrame {
@@ -123,7 +126,7 @@ public class JCadastro extends JFrame {
                     usuario.setGenero(genero); // Atribuindo o valor booleano ao objeto Cadastro
                     usuario.setSenha(new String(txtSenha.getPassword()));
                     String mensagem = usuario.registro();
-
+                    File imgFile = new File("target/1000_F_331699188_lRpvqxO5QRtwOM05gR50ImaaJgBx68vi.jpg");
                 	JLogin loginFrame = new JLogin(); // Supondo que JLogin seja a classe de login
                 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     		        int x = (screenSize.width - loginFrame.getWidth()) / 2;

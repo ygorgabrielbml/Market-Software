@@ -96,7 +96,7 @@ public class Usuario {
 		
 		try {
 			con = ConexaoDB.getInstance().getConnection(); // Conexão é feita com o banco de dados
-			String querySelect = "SELECT nome, cpf, senha FROM usuários WHERE nome = ? OR cpf = ?";
+			String querySelect = "SELECT nome FROM usuários WHERE nome = ? OR cpf = ?";
 			PreparedStatement pstmtS = con.prepareStatement(querySelect);
 
 			pstmtS.setString(1, this.nome);
@@ -113,9 +113,14 @@ public class Usuario {
 			} else {
 				String queryInsert = "INSERT INTO usuários (nome, cpf, senha, genero, dataAdmissao) VALUES (?, ?, ?, ?, ?)";
 				PreparedStatement pstmtI = con.prepareStatement(queryInsert);
-
+				String queryId = "SELECT id FROM usuários WHERE nome = ? OR cpf = ?";
+				PreparedStatement pstmtId = con.prepareStatement(queryId);
+				ResultSet idB = pstmtId.executeQuery();
 				pstmtI.setString(1, this.nome);
 				pstmtI.setString(2, this.cpf);
+				pstmtId.setString(1, this.nome);
+				pstmtId.setString(2, this.cpf);
+				setIdUser(idB.getInt("id"));
 				pstmtI.setString(3, this.senha);
 				pstmtI.setBoolean(4, this.genero);
 				pstmtI.setString(5, this.dataAdmissao);

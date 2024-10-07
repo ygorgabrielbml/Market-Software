@@ -18,6 +18,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import backend.Carrinho;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -113,7 +116,7 @@ public class JCompras extends JFrame {
 		PanelMeio.add(btnPesquisar);
 		btnPesquisar.addActionListener(e -> {
 			String pesquisa = txtPesquisa.getText();
-			ArrayList<String> resultado = pesquisarProduto(pesquisa);
+			ArrayList<Carrinho> resultado = Carrinho.pesquisar(pesquisa);
 			exibirResultadoPesquisa(resultado);
 		});
 
