@@ -55,7 +55,7 @@ public class JPerfil extends JFrame {
         setTitle("Perfil");
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 450, 300);
+        setBounds(100, 100, 450, 291);
         PanelGeral = new JPanel();
         PanelGeral.setBackground(new Color(184, 134, 11));
         PanelGeral.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -130,7 +130,7 @@ public class JPerfil extends JFrame {
         
         //Inicio do painel do meio.
         JPanel PanelMeio = new JPanel();
-        PanelMeio.setBounds(10, 61, 414, 189);
+        PanelMeio.setBounds(10, 61, 414, 176);
         PanelGeral.add(PanelMeio);
         PanelMeio.setLayout(null);
 
@@ -242,6 +242,12 @@ public class JPerfil extends JFrame {
         JLabel infoGenero = new JLabel(infos.get(3));
         infoGenero.setBounds(303, 39, 101, 22);
         PanelMeio.add(infoGenero);
+        
+        JButton btnTrocarConta = new JButton("Trocar conta");
+        btnTrocarConta.setForeground(Color.WHITE);
+        btnTrocarConta.setBackground(new Color(49, 62, 69));
+        btnTrocarConta.setBounds(278, 138, 126, 22);
+        PanelMeio.add(btnTrocarConta);
         
         btnMudarImagem.addActionListener(new ActionListener() {
 

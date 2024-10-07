@@ -35,7 +35,7 @@ public class JInicio extends JFrame {
 		setTitle("Início");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 330);
 		PanelGeral = new JPanel();
 		PanelGeral.setBackground(new Color(184, 134, 11));
 		PanelGeral.setForeground(Color.WHITE);
@@ -70,7 +70,7 @@ public class JInicio extends JFrame {
 
 		// Início do painel do meio.
 		JPanel PanelMeio = new JPanel();
-		PanelMeio.setBounds(10, 58, 414, 192);
+		PanelMeio.setBounds(10, 58, 414, 222);
 		PanelGeral.add(PanelMeio);
 		PanelMeio.setLayout(null);
 
@@ -95,15 +95,8 @@ public class JInicio extends JFrame {
 		}
 		JScrollPane scrollpane = new JScrollPane(listaProdutos);
 		scrollpane.setLocation(10, 42);
-		scrollpane.setSize(394, 120);
+		scrollpane.setSize(394, 169);
 		PanelMeio.add(scrollpane);
-
-		// Botão para mostrar informações do produto
-		JButton btnMostrarInfo = new JButton("Mostrar Informações");
-		btnMostrarInfo.setBounds(10, 170, 200, 23);
-		PanelMeio.add(btnMostrarInfo);
-
-		btnMostrarInfo.addActionListener(e -> mostrarInformacoesProduto());
 
 		// Ação do botão de pesquisa
 		btnPesquisar.addActionListener(e -> {
