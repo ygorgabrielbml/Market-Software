@@ -54,7 +54,7 @@ public class JPerfil extends JFrame {
 		setTitle("Perfil");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 283);
 		PanelGeral = new JPanel();
 		PanelGeral.setBackground(new Color(184, 134, 11));
 		PanelGeral.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -129,7 +129,7 @@ public class JPerfil extends JFrame {
 
 		// Inicio do painel do meio.
 		JPanel PanelMeio = new JPanel();
-		PanelMeio.setBounds(10, 61, 414, 189);
+		PanelMeio.setBounds(10, 61, 414, 170);
 		PanelGeral.add(PanelMeio);
 		PanelMeio.setLayout(null);
 
@@ -196,7 +196,7 @@ public class JPerfil extends JFrame {
 
 		Double valor = (Double) infoad.get(1);
 		JLabel infoValorGerado = new JLabel(valor.toString());
-		infoValorGerado.setBounds(137, 143, 156, 22);
+		infoValorGerado.setBounds(137, 143, 134, 22);
 		PanelMeio.add(infoValorGerado);
 
 		JLabel lblGenero = new JLabel("Genêro:");
@@ -231,6 +231,26 @@ public class JPerfil extends JFrame {
 		btnMudarImagem.setBackground(new Color(49, 62, 69));
 		btnMudarImagem.setBounds(10, 138, 117, 22);
 		PanelMeio.add(btnMudarImagem);
+		
+		JButton btnTrocarDeConta = new JButton("Trocar conta");
+		btnTrocarDeConta.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JLogin loginFrame = new JLogin();
+
+				// Centraliza a janela
+				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+				int x = (screenSize.width - loginFrame.getWidth()) / 2;
+				int y = (screenSize.height - loginFrame.getHeight()) / 2;
+				loginFrame.setLocation(x, y);
+				loginFrame.setVisible(true);
+				dispose();
+			}
+		});
+		btnTrocarDeConta.setForeground(Color.WHITE);
+		btnTrocarDeConta.setBackground(new Color(49, 62, 69));
+		btnTrocarDeConta.setBounds(278, 138, 126, 22);
+		PanelMeio.add(btnTrocarDeConta);
 		byte[] imagem = usuarioP.recuperarImagem();
 
 		if (imagem != null) {

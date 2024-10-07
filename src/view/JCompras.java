@@ -26,7 +26,7 @@ import backend.Carrinho;
 import backend.InfoPlus;
 import backend.Usuario;
 
-public class JCompras extends JFrame {
+public class JCompras extends JFrame{
 
     private static final long serialVersionUID = 1L;
     private JPanel PanelGeral;

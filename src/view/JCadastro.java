@@ -147,7 +147,20 @@ public class JCadastro extends JFrame {
         PanelMeio.add(btnCancelar);
         btnCancelar.setBackground(new Color(49, 62, 69));
         btnCancelar.setForeground(Color.WHITE);
-        btnCancelar.addActionListener(e -> dispose()); // Fecha a janela
+        btnCancelar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JLogin loginFrame = new JLogin();
+
+				// Centraliza a janela
+				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+				int x = (screenSize.width - loginFrame.getWidth()) / 2;
+				int y = (screenSize.height - loginFrame.getHeight()) / 2;
+				loginFrame.setLocation(x, y);
+				loginFrame.setVisible(true);
+				dispose();
+			}
+		});
 
         // Fim do criar conta & cancelar criação.
 
