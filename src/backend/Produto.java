@@ -29,13 +29,10 @@ public class Produto {
 	@Override
 	// Reescrição do metodo toString para conseguir mostrar corretamente a lista de produtos no aplicativo
     public String toString() {
-        return "Produto { " +
-                "ID: " + id +
-                ", Nome: '" + nome + '\'' +
+        return  " Nome: '" + nome + '\'' +
                 ", Código de Barras: '" + codigoBarras + '\'' +
                 ", Valor: " + valor +
-                ", Quantidade: " + quantidade +
-                " }";
+                ", Quantidade: " + quantidade;
     }
 
 	// Getters e Setters
