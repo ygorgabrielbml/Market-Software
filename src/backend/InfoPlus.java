@@ -89,7 +89,7 @@ public class InfoPlus extends Usuario {
 			String queryInsert = "INSERT INTO 'informações adicionais' (vendas, valorGerado, idUser) VALUES (?, ?, ?)";
 			PreparedStatement pstmtI = con.prepareStatement(queryInsert);
 
-			pstmtI.setInt(1, 0);
+			pstmtI.setInt(1, 1);
 			pstmtI.setDouble(2, valor);
 			pstmtI.setInt(3, this.idUser);
 
