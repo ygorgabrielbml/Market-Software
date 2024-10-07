@@ -35,7 +35,6 @@ public class JPerfil extends JFrame {
 
 	// Launch the application.
 
-<<<<<<< HEAD
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -49,21 +48,6 @@ public class JPerfil extends JFrame {
 			}
 		});
 	}
-=======
-    //Create the frame.
-     
-    public JPerfil() {
-        setTitle("Perfil");
-        setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 450, 291);
-        PanelGeral = new JPanel();
-        PanelGeral.setBackground(new Color(184, 134, 11));
-        PanelGeral.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(PanelGeral);
-        PanelGeral.setLayout(null);
-        Usuario usuario = JLogin.l1;
->>>>>>> refs/remotes/origin/main
 
 	// Create the frame.
 
@@ -114,7 +98,6 @@ public class JPerfil extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JEstoque estoqueFrame = new JEstoque();
 
-<<<<<<< HEAD
 				// Centraliza a janela
 				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 				int x = (screenSize.width - estoqueFrame.getWidth()) / 2;
@@ -124,15 +107,6 @@ public class JPerfil extends JFrame {
 				dispose();
 			}
 		});
-=======
-        //Fim do Header.
-        
-        //Inicio do painel do meio.
-        JPanel PanelMeio = new JPanel();
-        PanelMeio.setBounds(10, 61, 414, 176);
-        PanelGeral.add(PanelMeio);
-        PanelMeio.setLayout(null);
->>>>>>> refs/remotes/origin/main
 
 		JButton btnInicio = new JButton("Início");
 		btnInicio.setBounds(171, 11, 89, 23);
@@ -231,38 +205,12 @@ public class JPerfil extends JFrame {
 		lblGenero.setBounds(303, 25, 46, 14);
 		PanelMeio.add(lblGenero);
 
-<<<<<<< HEAD
 		JSeparator separator = new JSeparator();
 		separator.setForeground(new Color(0, 0, 0));
 		separator.setBackground(new Color(0, 0, 0));
 		separator.setOrientation(SwingConstants.VERTICAL);
 		separator.setBounds(303, 25, 0, 142);
 		PanelMeio.add(separator);
-=======
-        JButton btnMudarImagem = new JButton("Mudar foto");
-        btnMudarImagem.setForeground(new Color(255, 255, 255));
-        btnMudarImagem.setBackground(new Color(49, 62, 69));
-        btnMudarImagem.setBounds(10, 138, 117, 22);
-        PanelMeio.add(btnMudarImagem);
-        byte[] imagem = usuarioP.recuperarImagem();
-        originalImage = InfoPlus.converterBytesParaImage(imagem);
-        Image resizedImage = originalImage.getScaledInstance(lblImagem.getWidth(), lblImagem.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon resizedIcon = new ImageIcon(resizedImage);
-        lblImagem.setIcon(resizedIcon);
-        lblImagem.setText(null);
-        
-        JLabel infoGenero = new JLabel(infos.get(3));
-        infoGenero.setBounds(303, 39, 101, 22);
-        PanelMeio.add(infoGenero);
-        
-        JButton btnTrocarConta = new JButton("Trocar conta");
-        btnTrocarConta.setForeground(Color.WHITE);
-        btnTrocarConta.setBackground(new Color(49, 62, 69));
-        btnTrocarConta.setBounds(278, 138, 126, 22);
-        PanelMeio.add(btnTrocarConta);
-        
-        btnMudarImagem.addActionListener(new ActionListener() {
->>>>>>> refs/remotes/origin/main
 
 		// Fim do CheckBoxGênero
 
