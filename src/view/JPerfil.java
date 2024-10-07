@@ -3,6 +3,9 @@ package view;
 import java.awt.EventQueue;
 import javax.swing.JFileChooser;
 import java.io.File;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.*;
@@ -10,6 +13,9 @@ import java.awt.event.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import backend.Usuario;
+
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -19,12 +25,13 @@ import javax.swing.JCheckBox;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
+
 public class JPerfil extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel PanelGeral;
     private JLabel lblImagem;
-
+    
     
      // Launch the application.
      
@@ -54,7 +61,7 @@ public class JPerfil extends JFrame {
         PanelGeral.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(PanelGeral);
         PanelGeral.setLayout(null);
-
+        Usuario usuario = JLogin.l1;
         //Inicio do Header.
         
         JPanel Header = new JPanel();
@@ -131,8 +138,15 @@ public class JPerfil extends JFrame {
         PanelMeio.add(lblImagem);
 
         //Inicio do nome & cpf do funcionário.
-        
-        JTextArea infoNome = new JTextArea();
+        ArrayList<String> infos = null;
+		try {
+			infos = usuario.mostrarInfos();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        System.out.println(infos);
+        JLabel infoNome = new JLabel(infos.get(0));
         infoNome.setBounds(139, 39, 156, 22);
         PanelMeio.add(infoNome);
 
@@ -146,7 +160,7 @@ public class JPerfil extends JFrame {
         lblCPF.setFont(new Font("Tahoma", Font.BOLD, 11));
         PanelMeio.add(lblCPF);
 
-        JTextArea infoCPF = new JTextArea();
+        JLabel infoCPF = new JLabel(infos.get(1));
         infoCPF.setBounds(139, 72, 156, 22);
         PanelMeio.add(infoCPF);
 
@@ -170,6 +184,8 @@ public class JPerfil extends JFrame {
 
         JTextArea infoValorGerado = new JTextArea();
         infoValorGerado.setBounds(139, 143, 156, 22);
+        infoValorGerado.setEnabled(false);
+        infoValorGerado.setText("A");
         PanelMeio.add(infoValorGerado);
 	        
 	    //Fim do vendas realizadas & valor gerado;
