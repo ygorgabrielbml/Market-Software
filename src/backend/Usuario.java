@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import database.ConexaoDB;
 
@@ -161,11 +162,6 @@ public class Usuario {
 			// caso ele identifique que o nome buscado é igual ao nome que veio na busca do banco de dados e a senha ou que o cpf buscado é o mesmo
 			// do cpf que veio na busca e a senha, o login é efetuado e seta o id do usuário buscado como uma identificação que vai ser
 			// usada em outros pontos do aplicativo.
-			System.out.println(login);
-			System.out.println(n);
-			System.out.println(c);
-			System.out.println(s);
-			System.out.println(senha);
 			if ((this.login.equals(n) && this.senha.equals(s)) || (this.login.equals(c) && this.senha.equals(s))) {
 				mensagem = "Login efetuado com sucesso";
 				setIdUser(i);
@@ -190,8 +186,20 @@ public class Usuario {
 		return mensagem;
 	}
 	
-	public ArrayList<Usuario> mostrarInfos(){
+	public ArrayList<String> mostrarInfos() throws SQLException{
+		Connection con = ConexaoDB.getInstance().getConnection(); // Conexão com o banco de dados
+		String querySelect = "SELECT nome, cpf FROM usuários WHERE id = ?";
+		PreparedStatement pstmtS = con.prepareStatement(querySelect);
+		pstmtS.setInt(1, this.idUser);
+		ResultSet resultado = pstmtS.executeQuery();
+		ArrayList<String> item = new ArrayList<>();
+		while(resultado.next()) {
+			String n = resultado.getString("nome");
+			String c = resultado.getString("cpf");
+			item.add(n);
+			item.add(c);
+		}
 		
-		return;
+		return item;
 	}
 }
