@@ -188,7 +188,7 @@ public class Usuario {
 	
 	public ArrayList<String> mostrarInfos() throws SQLException{
 		Connection con = ConexaoDB.getInstance().getConnection(); // Conexão com o banco de dados
-		String querySelect = "SELECT nome, cpf FROM usuários WHERE id = ?";
+		String querySelect = "SELECT nome, cpf, dataAdmissao, genero FROM usuários WHERE id = ?";
 		PreparedStatement pstmtS = con.prepareStatement(querySelect);
 		pstmtS.setInt(1, this.idUser);
 		ResultSet resultado = pstmtS.executeQuery();
@@ -196,8 +196,19 @@ public class Usuario {
 		while(resultado.next()) {
 			String n = resultado.getString("nome");
 			String c = resultado.getString("cpf");
+			String d = resultado.getString("dataAdmissao");
+			System.out.println("a" + d);
+			boolean g = resultado.getBoolean("genero");
+			String generoT = null;
+			if (g) {
+				generoT = "Masculino";
+			}else {
+				generoT = "Feminino";
+			}
 			item.add(n);
 			item.add(c);
+			item.add(d);
+			item.add(generoT);
 		}
 		
 		return item;

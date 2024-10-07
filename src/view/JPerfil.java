@@ -23,6 +23,7 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import backend.InfoPlus;
 import backend.Usuario;
 
 public class JPerfil extends JFrame {
@@ -145,7 +146,6 @@ public class JPerfil extends JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-        System.out.println(infos);
         JLabel infoNome = new JLabel(infos.get(0));
         infoNome.setBounds(137, 39, 156, 22);
         PanelMeio.add(infoNome);
@@ -167,13 +167,25 @@ public class JPerfil extends JFrame {
         //Fim do nome & cpf do funcionário.
         
         //Inicio do vendas realizadas & valor gerado;
-        
+        InfoPlus usuarioP = new InfoPlus(usuario.getNome(), usuario.getCpf(), usuario.isGenero(), usuario.getSenha(), usuario.getDataAdmissao(), 0, 0, usuario.getIdUser());
+        ArrayList<Object> infoad = null;
+        try {
+			infoad = usuarioP.mostrarVendas();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        if (infoad.isEmpty()) {
+        	infoad.add(Integer.valueOf(0));
+        	infoad.add(Double.valueOf(0));
+        }
         JLabel lblVendasRealizadas = new JLabel("Vendas realizadas:");
         lblVendasRealizadas.setBounds(137, 93, 126, 14);
         lblVendasRealizadas.setFont(new Font("Tahoma", Font.BOLD, 11));
         PanelMeio.add(lblVendasRealizadas);
-
-        JTextArea infoVendasRealizadas = new JTextArea();
+        
+        Integer vendas = (Integer) infoad.get(0);
+        JLabel infoVendasRealizadas = new JLabel(vendas.toString());
         infoVendasRealizadas.setBounds(137, 105, 156, 22);
         PanelMeio.add(infoVendasRealizadas);
 
@@ -181,8 +193,9 @@ public class JPerfil extends JFrame {
         lblValorGerado.setBounds(137, 129, 111, 14);
         lblValorGerado.setFont(new Font("Tahoma", Font.BOLD, 11));
         PanelMeio.add(lblValorGerado);
-
-        JTextArea infoValorGerado = new JTextArea();
+        
+        Double valor = (Double) infoad.get(1);
+        JLabel infoValorGerado = new JLabel(valor.toString());
         infoValorGerado.setBounds(137, 143, 156, 22);
         PanelMeio.add(infoValorGerado);
 
@@ -207,7 +220,8 @@ public class JPerfil extends JFrame {
         lblDataAdmissao.setBounds(303, 93, 150, 14);
         PanelMeio.add(lblDataAdmissao);
 
-        JTextArea infoDataAdmisao = new JTextArea();
+        JLabel infoDataAdmisao = new JLabel(infos.get(2));
+        System.out.println(infos.get(2));
         infoDataAdmisao.setBounds(303, 105, 101, 22);
         PanelMeio.add(infoDataAdmisao);
         
@@ -219,10 +233,10 @@ public class JPerfil extends JFrame {
         btnMudarImagem.setBounds(10, 138, 117, 22);
         PanelMeio.add(btnMudarImagem);
         
-        JTextArea infoDataAdmisao_1 = new JTextArea();
-        infoDataAdmisao_1.setBounds(303, 39, 101, 22);
-        PanelMeio.add(infoDataAdmisao_1);
-
+        JLabel infoGenero = new JLabel(infos.get(3));
+        infoGenero.setBounds(303, 39, 101, 22);
+        PanelMeio.add(infoGenero);
+        
         btnMudarImagem.addActionListener(new ActionListener() {
 
             @Override
@@ -240,6 +254,7 @@ public class JPerfil extends JFrame {
                     ImageIcon resizedIcon = new ImageIcon(resizedImage);
                     lblImagem.setIcon(resizedIcon);
                     lblImagem.setText(null);
+                    System.out.println(selectedFile);
        
                 }
             }

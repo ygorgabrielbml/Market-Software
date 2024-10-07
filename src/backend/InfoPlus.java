@@ -1,6 +1,9 @@
 package backend;
 
-import java.lang.reflect.Array;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,12 +15,14 @@ import database.ConexaoDB;
 public class InfoPlus extends Usuario {
 	private int vendasRealizadas;
 	private double valorGerado;
+	private int idUser;
 
 	public InfoPlus(String nome, String cpf, boolean genero, String senha, String data, int vendasRealizadas,
-			double valorGerado) {
+			double valorGerado, int idUser) {
 		super(nome, cpf, genero, senha, data);
 		this.vendasRealizadas = vendasRealizadas;
 		this.valorGerado = valorGerado;
+		this.idUser = idUser;
 	}
 
 	@Override
@@ -91,5 +96,34 @@ public class InfoPlus extends Usuario {
 			pstmtU.executeUpdate();
 		}
 
+	}
+	
+	public void setImagem(String nomeImagem, String caminhoImagem) {
+		Connection con = null;
+		con = ConexaoDB.getInstance().getConnection(); // Conexão é feita com o banco de dados
+		String queryInsert = "INSERT INTO 'informações adicionais' (imagem) VALUES (?) WHERE idUser = ?";
+		try {
+			PreparedStatement pstmtI = con.prepareStatement(queryInsert);
+			File arquivo = new File(caminhoImagem);
+			FileInputStream fis = null;
+			try {
+				fis = new FileInputStream(arquivo);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			pstmtI.setBinaryStream(1, fis, (int) arquivo.length());
+			pstmtI.setInt(2, this.idUser);
+			pstmtI.executeUpdate();
+			try {
+				fis.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -10,6 +10,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import backend.Produto;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -149,6 +152,19 @@ public class JEstoque extends JFrame {
 		btnAdicionarProduto.setBackground(new Color(49, 62, 69));
 		btnAdicionarProduto.setBounds(51, 200, 144, 30);
 		panelAdicionarProdutos.add(btnAdicionarProduto);
+		btnAdicionarProduto.addActionListener(new ActionListener() { 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	String nome = inputNomeProduto.getText();
+            	String CB = inputCB.getText();
+            	String preço = inputPreco.getText();
+            	String quantidade = inputQuantidade.getText();
+            	
+            	double preçoT = Double.parseDouble(preço);
+            	int quantidadeT = Integer.parseInt(quantidade);
+            	Produto.addProduto(nome, CB, preçoT, quantidadeT);
+            }
+        });
 		
 		JLabel lblNomeProduto = new JLabel("Nome do produto: ");
 		lblNomeProduto.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -225,6 +241,15 @@ public class JEstoque extends JFrame {
 		btnRemoverProduto.setBackground(new Color(49, 62, 69));
 		btnRemoverProduto.setBounds(34, 200, 144, 30);
 		panelRemoverProdutos.add(btnRemoverProduto);
+		btnRemoverProduto.addActionListener(new ActionListener() { 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	String CB = textField.getText();
+            	
+            	Produto.remProduto(CB);
+            }
+        });
+
 		
 		//Fim do painel de adicionar produtos.
 		
