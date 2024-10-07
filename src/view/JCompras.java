@@ -203,6 +203,7 @@ public class JCompras extends JFrame {
         btnFinalizarCompra.setBounds(10, 310, 252, 23);
         PanelMeio.add(btnFinalizarCompra);
         
+        
     }
 
     private void inicializarListaProdutos() {
