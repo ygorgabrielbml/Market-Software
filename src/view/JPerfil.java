@@ -1,23 +1,29 @@
 package view;
 
-import java.awt.EventQueue;
-import javax.swing.JFileChooser;
-import java.io.File;
-import javax.swing.ImageIcon;
-import java.awt.event.ActionListener;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
 import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JTextArea;
+import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JCheckBox;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import backend.Usuario;
 
 public class JPerfil extends JFrame {
 
@@ -54,6 +60,7 @@ public class JPerfil extends JFrame {
         PanelGeral.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(PanelGeral);
         PanelGeral.setLayout(null);
+        Usuario usuario = JLogin.l1;
 
         //Inicio do Header.
         
@@ -131,8 +138,15 @@ public class JPerfil extends JFrame {
         PanelMeio.add(lblImagem);
 
         //Inicio do nome & cpf do funcionário.
-        
-        JTextArea infoNome = new JTextArea();
+        ArrayList<String> infos = null;
+		try {
+			infos = usuario.mostrarInfos();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        System.out.println(infos);
+        JLabel infoNome = new JLabel(infos.get(0));
         infoNome.setBounds(137, 39, 156, 22);
         PanelMeio.add(infoNome);
 
@@ -146,7 +160,7 @@ public class JPerfil extends JFrame {
         lblCPF.setFont(new Font("Tahoma", Font.BOLD, 11));
         PanelMeio.add(lblCPF);
 
-        JTextArea infoCPF = new JTextArea();
+        JLabel infoCPF = new JLabel(infos.get(1));
         infoCPF.setBounds(137, 72, 156, 22);
         PanelMeio.add(infoCPF);
 
