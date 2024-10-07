@@ -19,7 +19,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
@@ -31,6 +30,7 @@ public class JPerfil extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel PanelGeral;
     private JLabel lblImagem;
+    private Image originalImage;
 
     
      // Launch the application.
@@ -232,6 +232,12 @@ public class JPerfil extends JFrame {
         btnMudarImagem.setBackground(new Color(49, 62, 69));
         btnMudarImagem.setBounds(10, 138, 117, 22);
         PanelMeio.add(btnMudarImagem);
+        byte[] imagem = usuarioP.recuperarImagem();
+        originalImage = InfoPlus.converterBytesParaImage(imagem);
+        Image resizedImage = originalImage.getScaledInstance(lblImagem.getWidth(), lblImagem.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon resizedIcon = new ImageIcon(resizedImage);
+        lblImagem.setIcon(resizedIcon);
+        lblImagem.setText(null);
         
         JLabel infoGenero = new JLabel(infos.get(3));
         infoGenero.setBounds(303, 39, 101, 22);
@@ -249,12 +255,12 @@ public class JPerfil extends JFrame {
                     File selectedFile = fileChooser.getSelectedFile();
                     ImageIcon originalIcon = new ImageIcon(selectedFile.getPath());
                     // Redimensionar a imagem
-                    Image originalImage = originalIcon.getImage();
+                    originalImage = originalIcon.getImage();
                     Image resizedImage = originalImage.getScaledInstance(lblImagem.getWidth(), lblImagem.getHeight(), Image.SCALE_SMOOTH);
                     ImageIcon resizedIcon = new ImageIcon(resizedImage);
                     lblImagem.setIcon(resizedIcon);
                     lblImagem.setText(null);
-                    System.out.println(selectedFile);
+                    usuarioP.inserirImagem(selectedFile);
        
                 }
             }
