@@ -58,7 +58,7 @@ public class JLogin extends JFrame {
         lblLogin.setBounds(147, 30, 150, 20);
         PanelGeral.add(lblLogin);
 
-        JLabel lblUsuario = new JLabel("Usuário:");
+        JLabel lblUsuario = new JLabel("Usuario:");
         lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
         lblUsuario.setBounds(147, 60, 58, 14);
         PanelGeral.add(lblUsuario);
@@ -96,6 +96,8 @@ public class JLogin extends JFrame {
                     !login.isEmpty() &&
                     senha != null &&
                     senha.length() > 0) {
+                	
+                	
                 	Usuario l1 = new Usuario();
                 	l1.setSenha(senha);
                 	l1.setLogin(login);
