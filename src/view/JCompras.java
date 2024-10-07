@@ -26,7 +26,7 @@ import backend.Carrinho;
 import backend.InfoPlus;
 import backend.Usuario;
 
-public class JCompras extends JFrame {
+public class JCompras extends JFrame{
 
     private static final long serialVersionUID = 1L;
     private JPanel PanelGeral;
@@ -52,7 +52,7 @@ public class JCompras extends JFrame {
         setTitle("Compras");
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 580, 453);
+        setBounds(100, 100, 580, 422);
         PanelGeral = new JPanel();
         PanelGeral.setBackground(new Color(184, 134, 11));
         PanelGeral.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -99,7 +99,7 @@ public class JCompras extends JFrame {
         });
 
         JPanel PanelMeio = new JPanel();
-        PanelMeio.setBounds(10, 62, 544, 339);
+        PanelMeio.setBounds(10, 62, 544, 307);
         PanelGeral.add(PanelMeio);
         PanelMeio.setLayout(null);
 
@@ -139,7 +139,7 @@ public class JCompras extends JFrame {
 		PanelMeio.add(scrollpane);
 
         JSeparator separator = new JSeparator();
-        separator.setBounds(275, 61, 10, 278);
+        separator.setBounds(275, 61, 10, 236);
         separator.setOrientation(SwingConstants.VERTICAL);
         separator.setForeground(new Color(184, 134, 11));
         separator.setBackground(new Color(184, 134, 11));
@@ -162,7 +162,7 @@ public class JCompras extends JFrame {
         modeloCarrinho = new DefaultListModel<>();
         JList<String> listCarrinho = new JList<>(modeloCarrinho);
         JScrollPane scrollpane2 = new JScrollPane(listCarrinho);
-        scrollpane2.setBounds(282, 74, 252, 259);
+        scrollpane2.setBounds(282, 74, 252, 224);
         PanelMeio.add(scrollpane2);
 
         JLabel lblCarrinho = new JLabel("Carrinho:");
@@ -197,7 +197,7 @@ public class JCompras extends JFrame {
 
 
         JButton btnCancelarCompra = new JButton("Cancelar compra");
-        btnCancelarCompra.setBounds(115, 276, 147, 23);
+        btnCancelarCompra.setBounds(115, 245, 147, 23);
         btnCancelarCompra.setForeground(new Color(255, 255, 255));
         btnCancelarCompra.setBackground(new Color(49, 62, 64));
         PanelMeio.add(btnCancelarCompra);
@@ -206,7 +206,7 @@ public class JCompras extends JFrame {
         JButton btnFinalizarCompra = new JButton("Finalizar Compra");
         btnFinalizarCompra.setForeground(new Color(255, 255, 255));
         btnFinalizarCompra.setBackground(new Color(49, 62, 64));
-        btnFinalizarCompra.setBounds(10, 310, 252, 23);
+        btnFinalizarCompra.setBounds(10, 276, 252, 23);
         PanelMeio.add(btnFinalizarCompra);
         btnFinalizarCompra.addActionListener(e -> finalizarCompra());
     }

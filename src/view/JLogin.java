@@ -52,13 +52,6 @@ public class JLogin extends JFrame {
 		setContentPane(PanelGeral);
 		PanelGeral.setLayout(null);
 
-		// Início do Login (usuario & senha).
-		JLabel lblLogin = new JLabel("Login");
-		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblLogin.setBounds(147, 30, 150, 20);
-		PanelGeral.add(lblLogin);
-
 		JLabel lblUsuario = new JLabel("Usuário:");
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblUsuario.setBounds(147, 60, 58, 14);
@@ -146,5 +139,11 @@ public class JLogin extends JFrame {
 		PanelMeio.setBackground(new Color(255, 255, 255));
 		PanelMeio.setBounds(113, 20, 200, 230);
 		PanelGeral.add(PanelMeio);
+		
+				// Início do Login (usuario & senha).
+				JLabel lblLogin = new JLabel("Login");
+				PanelMeio.add(lblLogin);
+				lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
+				lblLogin.setFont(new Font("Tahoma", Font.BOLD, 14));
 	}
 }

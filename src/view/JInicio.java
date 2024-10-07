@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import backend.Carrinho;
 import backend.Produto;
 
-public class JInicio extends JFrame {
+public class JInicio extends JFrame implements JanelaInterface{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel PanelGeral;
@@ -120,7 +120,7 @@ public class JInicio extends JFrame {
 	}
 
 	// Método para navegar entre as janelas
-	private void navigateTo(Class<?> clazz) {
+	public void navigateTo(Class<?> clazz) {
 		try {
 			JFrame frame = (JFrame) clazz.getDeclaredConstructor().newInstance();
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -135,7 +135,7 @@ public class JInicio extends JFrame {
 	}
 
 	// Método para mostrar as informações do produto
-	private void mostrarInformacoesProduto() {
+	public void mostrarInformacoesProduto() {
 		Carrinho produtoSelecionado = (Carrinho) listaProdutos.getSelectedValue();
 		if (produtoSelecionado != null) {
 			JOptionPane.showMessageDialog(this,
@@ -147,4 +147,7 @@ public class JInicio extends JFrame {
 					"Nenhum Produto Selecionado", JOptionPane.WARNING_MESSAGE);
 		}
 	}
+
+
+
 }
