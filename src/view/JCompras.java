@@ -46,7 +46,7 @@ public class JCompras extends JFrame {
         setTitle("Compras");
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 580, 430);
+        setBounds(100, 100, 580, 470);
         PanelGeral = new JPanel();
         PanelGeral.setBackground(new Color(184, 134, 11));
         PanelGeral.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -122,7 +122,7 @@ public class JCompras extends JFrame {
 
         // Inicio do painel do meio.
         JPanel PanelMeio = new JPanel();
-        PanelMeio.setBounds(10, 62, 544, 318);
+        PanelMeio.setBounds(10, 62, 544, 358);
         PanelGeral.add(PanelMeio);
         PanelMeio.setLayout(null);
 
@@ -153,11 +153,11 @@ public class JCompras extends JFrame {
         PanelMeio.add(lblResultados);
 
         areaResultados = new JTextArea();  // Inicializa o JTextArea
-        areaResultados.setBounds(10, 70, 250, 170);
+        areaResultados.setBounds(10, 70, 250, 110);
         PanelMeio.add(areaResultados);
 
         JSeparator separator = new JSeparator();
-        separator.setBounds(272, 61, 10, 257);
+        separator.setBounds(272, 61, 10, 297);
         separator.setOrientation(SwingConstants.VERTICAL);
         separator.setForeground(new Color(184, 134, 11));
         separator.setBackground(new Color(184, 134, 11));
@@ -174,11 +174,11 @@ public class JCompras extends JFrame {
         // Início do método de pagamento.
         JLabel lblMetodoPagamento = new JLabel("Método de pagamento: ");
         lblMetodoPagamento.setFont(new Font("Tahoma", Font.BOLD, 11));
-        lblMetodoPagamento.setBounds(348, 266, 135, 14);
+        lblMetodoPagamento.setBounds(70, 269, 135, 14);
         PanelMeio.add(lblMetodoPagamento);
 
         JSeparator separator_1 = new JSeparator();
-        separator_1.setBounds(272, 253, 272, 2);
+        separator_1.setBounds(0, 259, 272, 2);
         separator_1.setForeground(new Color(184, 134, 11));
         separator_1.setBackground(new Color(184, 134, 11));
         PanelMeio.add(separator_1);
@@ -186,19 +186,32 @@ public class JCompras extends JFrame {
         JButton btnDebito = new JButton("Débito");
         btnDebito.setForeground(new Color(255, 255, 255));
         btnDebito.setBackground(new Color(49, 62, 69));
-        btnDebito.setBounds(372, 291, 76, 23);
+        btnDebito.setBounds(98, 294, 76, 23);
         PanelMeio.add(btnDebito);
+        btnDebito.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDebito debitoFrame = new JDebito();
+                // Centraliza a janela
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                int x = (screenSize.width - debitoFrame.getWidth()) / 2;
+                int y = (screenSize.height - debitoFrame.getHeight()) / 2;
+                debitoFrame.setLocation(x, y);
+                debitoFrame.setVisible(true);
+            }
+        });
+        
 
         JButton btnCredito = new JButton("Crédito");
         btnCredito.setBackground(new Color(49, 62, 69));
         btnCredito.setForeground(new Color(255, 255, 255));
-        btnCredito.setBounds(458, 291, 76, 23);
+        btnCredito.setBounds(184, 294, 76, 23);
         PanelMeio.add(btnCredito);
 
         JButton btnAvista = new JButton("À vista");
         btnAvista.setForeground(new Color(255, 255, 255));
         btnAvista.setBackground(new Color(49, 62, 69));
-        btnAvista.setBounds(286, 291, 76, 23);
+        btnAvista.setBounds(10, 294, 76, 23);
         PanelMeio.add(btnAvista);
 
         // Fim do método de pagamento.
@@ -206,24 +219,42 @@ public class JCompras extends JFrame {
         // Inicio do valor total, remover produto do carrinho e cancelar compra.
         JLabel lblValorTotal = new JLabel("Valor total: ");
         lblValorTotal.setFont(new Font("Tahoma", Font.BOLD, 11));
-        lblValorTotal.setBounds(292, 195, 70, 14);
+        lblValorTotal.setBounds(35, 212, 70, 14);
         PanelMeio.add(lblValorTotal);
 
         JTextArea infoValorTotal = new JTextArea();
-        infoValorTotal.setBounds(292, 209, 70, 22);
+        infoValorTotal.setEnabled(false);
+        infoValorTotal.setEditable(false);
+        infoValorTotal.setBounds(35, 226, 70, 22);
         PanelMeio.add(infoValorTotal);
 
         JButton btnRemoverProduto = new JButton("Remover");
         btnRemoverProduto.setBackground(new Color(49, 62, 69));
         btnRemoverProduto.setForeground(new Color(255, 255, 255));
-        btnRemoverProduto.setBounds(401, 191, 96, 23);
+        btnRemoverProduto.setBounds(144, 208, 96, 23);
         PanelMeio.add(btnRemoverProduto);
 
         JButton btnCancelarCompra = new JButton("Cancelar");
         btnCancelarCompra.setForeground(new Color(255, 255, 255));
         btnCancelarCompra.setBackground(new Color(49, 62, 69));
-        btnCancelarCompra.setBounds(401, 217, 96, 23);
+        btnCancelarCompra.setBounds(144, 234, 96, 23);
         PanelMeio.add(btnCancelarCompra);
+        
+        JSeparator separator_1_2 = new JSeparator();
+        separator_1_2.setForeground(new Color(184, 134, 11));
+        separator_1_2.setBackground(new Color(184, 134, 11));
+        separator_1_2.setBounds(0, 199, 272, 2);
+        PanelMeio.add(separator_1_2);
+        
+        JButton btnNewButton = new JButton("Finalizar compra");
+        btnNewButton.setForeground(new Color(255, 255, 255));
+        btnNewButton.setBackground(new Color(49, 62, 64));
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        btnNewButton.setBounds(10, 328, 250, 23);
+        PanelMeio.add(btnNewButton);
     }
 
     // Inicializa uma lista manual de produtos.
